@@ -1,0 +1,19 @@
+.registerform {
+  display: flex;
+  flex: 2;
+}
+
+.description {
+  flex: 1;
+}
+.form {
+  flex: 1;
+  margin: 0px 40px 20px 40px;
+}
+.registerhostelowner {
+  /* padding: 30px; */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: rgb(250, 247, 247);
+}
+/* rgb(203, 195, 195) */

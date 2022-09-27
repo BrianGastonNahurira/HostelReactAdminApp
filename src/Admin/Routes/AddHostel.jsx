@@ -1,11 +1,11 @@
 import React from "react";
-import { Header } from "../../components/Header/Header";
-import { SideBar } from "../../components/SideBar/SideBar";
 import "../../Admin/Design/Home.css";
 import "../../Admin/Design/AddHostel.css";
 import { Button, TextField } from "@mui/material";
+import Header from "../Components/Header/Header";
+import SideBar from "../Components/SideBar/SideBar";
 
-export const AddHostel = () => {
+const AddHostel=() => {
   return (
     <>
       <section className="addHostel-page">
@@ -188,3 +188,4 @@ export const AddHostel = () => {
     </>
   );
 };
+export default AddHostel;

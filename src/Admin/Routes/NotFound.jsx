@@ -1,6 +1,6 @@
 import React from "react";
 import "../../components/SideBar/SideBar.css";
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <>
       <div
@@ -23,3 +23,4 @@ export const NotFound = () => {
     </>
   );
 };
+export default NotFound;

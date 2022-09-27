@@ -1,12 +1,12 @@
 import React from "react";
-import "../Drawables/passport.jpeg";
+// import "../Drawables/passport.jpeg";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "../Header/Header.css";
 import ReorderIcon from "@mui/icons-material/Reorder";
 
-export const Header = () => {
+const Header = () => {
   return (
-    <div className="header card">
+    <div className="header-ctr card">
       <div className="beaconLogo" style={{ marginLeft: "5px" }}>
         <div className="div-bar">
           <ReorderIcon
@@ -39,3 +39,4 @@ export const Header = () => {
     </div>
   );
 };
+export default Header;

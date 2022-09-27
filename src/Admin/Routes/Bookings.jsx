@@ -1,10 +1,10 @@
 import React from "react";
 import "../../Admin/Design/Home.css";
-import { Header } from "../../components/Header/Header";
-import { SideBar } from "../../components/SideBar/SideBar";
-import { StateTable } from "../../components/Tables/Table";
+import Header from "../Components/Header/Header";
+import SideBar from "../Components/SideBar/SideBar";
+import { StateTable } from "../Components/Tables/Table";
 
-export const Bookings = () => {
+export default () => {
   return (
     <>
       <section>

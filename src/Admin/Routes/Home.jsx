@@ -1,10 +1,10 @@
 import React from "react";
 import "../Design/Home.css";
-import { Header } from "../../components/Header/Header";
-import { SideBar } from "../../components/SideBar/SideBar";
-import { StateTable } from "../../components/Tables/Table";
+import { StateTable } from "../Components/Tables/Table";
+import Header from "../Components/Header/Header";
+import SideBar from "../Components/SideBar/SideBar";
 
-export const Home = () => {
+const Home = () => {
   return (
     <>
       <section className="home-page">
@@ -72,3 +72,4 @@ export const Home = () => {
     </>
   );
 };
+export default Home;

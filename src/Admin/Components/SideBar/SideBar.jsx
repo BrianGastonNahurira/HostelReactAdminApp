@@ -8,13 +8,13 @@ import PendingIcon from "@mui/icons-material/Pending";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddHomeWorkIcon from "@mui/icons-material/AddHomeWork";
 import { Link } from "@mui/material";
-import Logo from "../Drawables/beaconLogo.jpeg";
+// import Logo from "../Drawables/beaconLogo.jpeg";
 
-export const SideBar = () => {
+const SideBar = () => {
   return (
     <div className="sidebar card">
       <div style={{ marginTop: "10vh" }}>
-        <img src={Logo} style={{ height: "3cm", width: "4.1cm" }} alt="" />
+        <img src="" style={{ height: "3cm", width: "4.1cm" }} alt="" />
       </div>
       <Link href="/home" style={{ color: "gray", textDecoration: "none" }}>
         <div className="icons">
@@ -70,3 +70,4 @@ export const SideBar = () => {
     </div>
   );
 };
+export default SideBar;

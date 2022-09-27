@@ -1,13 +1,13 @@
 import React from "react";
-import { Header } from "../../components/Header/Header";
-import { SideBar } from "../../components/SideBar/SideBar";
 import "../../Admin/Design/Home.css";
 import "../../Admin/Design/AddHostel.css";
 import "../../Admin/Design/Register.css";
-import Logo from "../../components/Drawables/beaconLogo.jpeg";
+// import Logo from "../../components/Drawables/beaconLogo.jpeg";
 import { Button, TextField } from "@mui/material";
+import Header from "../Components/Header/Header";
+import SideBar from "../Components/SideBar/SideBar";
 
-export const RegisterHostelOwners = () => {
+const RegisterHostelOwners = () => {
   return (
     <>
       <section className="registerOwners-page">
@@ -27,7 +27,7 @@ export const RegisterHostelOwners = () => {
           <div className="registerform card">
             <div className="description">
               <img
-                src={Logo}
+                // src={Logo}
                 style={{ height: "7cm", marginLeft: "120px", width: "12cm" }}
                 alt=""
               />
@@ -122,3 +122,4 @@ export const RegisterHostelOwners = () => {
     </>
   );
 };
+export default RegisterHostelOwners;

@@ -1,10 +1,10 @@
 import React from "react";
 import "../../Admin/Design/Home.css";
-import { Header } from "../../components/Header/Header";
-import { SideBar } from "../../components/SideBar/SideBar";
-import { PendingTbl } from "../../components/Tables/PendingHostelsTbl";
+import Header from "../Components/Header/Header";
+import SideBar from "../Components/SideBar/SideBar";
+import { PendingTbl } from "../Components/Tables/PendingHostelsTbl";
 
-export const PendingHostel = () => {
+export default() => {
   return (
     <>
       <section>

@@ -1,10 +1,10 @@
 import React from "react";
-import { Header } from "../../components/Header/Header";
-import { SideBar } from "../../components/SideBar/SideBar";
 import "../../Admin/Design/Home.css";
-import { HostelTable } from "../../components/Tables/HostelTbl";
+import Header from "../Components/Header/Header";
+import SideBar from "../Components/SideBar/SideBar";
+import { HostelTable } from "../Components/Tables/HostelTbl";
 
-export const Hostels = () => {
+export default() => {
   return (
     <>
       <section className="hostels-page">

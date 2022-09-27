@@ -1,0 +1,19 @@
+.p_text404{
+    margin: 0 auto 90px;
+    width: 70%;
+}
+p{
+    color: #7B7B7B;
+    margin: 0px 0px 10px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.error_text {
+    margin: 0 0 15px;
+    color: #444;
+    font-weight: bolder;
+    text-align: center;
+}

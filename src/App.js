@@ -1,6 +1,6 @@
 import React from "react";
-import "./index.js";
+import "./App.css";
 import "line-awesome/dist/line-awesome/css/line-awesome.css";
-import { Index } from "./routes";
+import { Index } from "./Admin/index";
 
 export default () => <Index />;

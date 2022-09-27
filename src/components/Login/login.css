@@ -1,19 +1,113 @@
-.card {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  background-color: white;
-  /* margin: 5px 10px; */
+
+  .header {
+    font-size: 30px;
+    font-weight: 500;
+    color: #444444;
+
+  }
+  .loader {
+    /* background-color: rgba(48, 63, 159, 0.5); */
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .loader > div {
+    color: #fff;
+    font-size: 18.5px;
+  }
+  .ctr {
+    z-index: 20;
+    left: 150px;
+    margin-top: 6%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    background: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 30%;
+  }
+  .img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  .m-ctr{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 75%;
+    margin: 25px auto
+
+  }
+  .text-ctr{
+    align-items: center;
+    flex: 1;
+    margin-left: 30px;
+   
+
+
+  }
+  .text-ctr > div {
+    margin: 10px 30px 10px 0px;
+  }
+  .text-ctr > div:first-child {
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 20px 0px;
+    width: 17%;
+    padding: 10px;
+    color: blue;
+  }
+  .text-ctr > div:nth-child(2){
+    font-size: 25px;
+    color: #7B7B7B;
 }
-.login {
-  display: flex;
-  flex: 2;
+.text-ctr > div:nth-child(3){
+  font-size: 18px;
+  color: #444444;
 }
-.logininfo {
-  flex: 1;
+.text-ctr > div:nth-child(4){
+  font-size: 17px;
+  color: #444444;
 }
-.loginform {
-  flex: 1;
+/*media queries*/
+@media screen and (max-width: 1024px) {
+  .m-ctr {
+    width: 95%;
+  }
 }
-.mylogin-demo p {
-  margin-bottom: 44vh;
+@media screen and (max-width: 768px) {
+  .m-ctr {
+    flex-direction: column-reverse;
+  }
+  .ctr{
+    width: 80%;
+  }
+  .login-logo-ctr {
+    display: none;
+  }
+  .text-ctr {
+    margin: 20px 10%;
+  }
+  .text-ctr > div:first-child{
+    width: 40%;
+    align-items: center;
+    padding: 15px;
+    justify-content: center;
+  }
 }

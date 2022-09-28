@@ -9,14 +9,19 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddHomeWorkIcon from "@mui/icons-material/AddHomeWork";
 import { Link } from "@mui/material";
 // import Logo from "../Drawables/beaconLogo.jpeg";
+import logo from "../../Drawables/kanlytelogo.png";
 
 const SideBar = () => {
   return (
     <div className="sidebar card">
       <div style={{ marginTop: "10vh" }}>
-        <img src="" style={{ height: "3cm", width: "4.1cm" }} alt="" />
+        <img
+          src={logo}
+          style={{ height: "3cm", marginLeft: "0.3cm", width: "3cm" }}
+          alt=""
+        />
       </div>
-      <Link href="/home" style={{ color: "gray", textDecoration: "none" }}>
+      <Link href="/" style={{ color: "gray", textDecoration: "none" }}>
         <div className="icons">
           <AddHomeWorkIcon />
           <p>Home</p>

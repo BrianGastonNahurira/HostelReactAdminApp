@@ -2,6 +2,7 @@ import React from "react";
 import "../../Admin/Design/Home.css";
 import "../../Admin/Design/AddHostel.css";
 import "../../Admin/Design/Register.css";
+import Logo from "../../Admin/Drawables/kanlytelogo.png";
 // import Logo from "../../components/Drawables/beaconLogo.jpeg";
 import { Button, TextField } from "@mui/material";
 import Header from "../Components/Header/Header";
@@ -27,8 +28,13 @@ const RegisterHostelOwners = () => {
           <div className="registerform card">
             <div className="description">
               <img
-                // src={Logo}
-                style={{ height: "7cm", marginLeft: "120px", width: "12cm" }}
+                src={Logo}
+                style={{
+                  height: "7cm",
+                  marginLeft: "130px",
+                  marginTop: "30px",
+                  width: "8cm",
+                }}
                 alt=""
               />
               <h2
@@ -51,12 +57,13 @@ const RegisterHostelOwners = () => {
               <div
                 className="Registerhostelowner"
                 style={{
-                  // border: "1px solid rgb(203, 195, 195) ",
-                  backgroundColor: " rgb(250, 247, 247)",
+                  border: "1px solid rgb(203, 195, 195) ",
+                  // backgroundColor: " rgb(250, 247, 247)",
                 }}
               >
                 <div>
                   <TextField
+                    className="reg-textfield"
                     color="primary"
                     label="Name"
                     style={{ width: "60%", margin: "30px 0px 0px 80px" }}
@@ -67,6 +74,7 @@ const RegisterHostelOwners = () => {
                 </div>
                 <div>
                   <TextField
+                    className="reg-textfield"
                     color="primary"
                     label="Hostel"
                     style={{ width: "60%", margin: "30px 0px 0px 80px" }}
@@ -77,6 +85,7 @@ const RegisterHostelOwners = () => {
                 </div>
                 <div>
                   <TextField
+                    className="reg-textfield"
                     color="primary"
                     label="Email"
                     style={{ width: "60%", margin: "30px 0px 0px 80px" }}
@@ -87,6 +96,7 @@ const RegisterHostelOwners = () => {
                 </div>
                 <div>
                   <TextField
+                    className="reg-textfield"
                     color="primary"
                     label="TelphoneNumber"
                     style={{ width: "60%", margin: "30px 0px 0px 80px" }}
@@ -97,6 +107,7 @@ const RegisterHostelOwners = () => {
                 </div>
                 <div>
                   <TextField
+                    className="reg-textfield"
                     color="primary"
                     label="One time Password"
                     style={{ width: "60%", margin: "30px 0px 0px 80px" }}
@@ -106,6 +117,7 @@ const RegisterHostelOwners = () => {
                   />
                 </div>
                 <Button
+                  className="submit-btn"
                   variant="contained"
                   style={{
                     padding: "5px 25px 5px 25px",
@@ -117,6 +129,12 @@ const RegisterHostelOwners = () => {
               </div>
             </div>
           </div>
+          <p
+            style={{ textAlign: "center", color: "blue" }}
+            className="copyright"
+          >
+            copyrights reserved @kanlyteug 2022
+          </p>
         </div>
       </section>
     </>

@@ -7,6 +7,7 @@
   /* background-color: white; */
   justify-content: space-between;
   position: fixed;
+  z-index: 20;
 }
 .beaconLogo h2 {
   font-weight: bolder;

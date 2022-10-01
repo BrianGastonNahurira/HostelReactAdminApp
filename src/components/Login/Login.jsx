@@ -16,7 +16,7 @@ const Login = () => {
           style={{  }}
         />
         <div
-          className="header"
+          className="header-txt"
           style={{
             // margin: "15px 0px",
           }}

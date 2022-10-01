@@ -6,17 +6,11 @@ import { HostelOwnerTbl } from "../Components/Tables/HostelOwnerTbl";
 const HostelOwners = () => {
   return (
     <>
-      <section className="hostelOwners-page">
-        <div className="home-header">
+      <input type="checkbox" id="nav-toggle" defaultChecked />
+      <SideBar active = "hostelowners" />
+      <div className="main_ctr">
           <Header />
-        </div>
-        <div>
-          <SideBar />
-        </div>
-        <div
-          className="home-body  "
-          style={{ maxHeight: "90vh", overflowY: "scroll" }}
-        >
+        <main>
           <div>
             <h2 style={{ color: "gray", textAlign: "center" }}>
               {" "}
@@ -27,8 +21,8 @@ const HostelOwners = () => {
           <div className="card">
             <HostelOwnerTbl />
           </div>
-        </div>
-      </section>
+        </main>
+      </div>
     </>
   );
 };

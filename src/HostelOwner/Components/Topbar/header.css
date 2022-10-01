@@ -1,0 +1,36 @@
+header {
+    border-radius: 4px;
+    margin: 10px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    position: fixed;
+    left: 250px;
+    width: calc(100% - 275px);
+    top: 0;
+    z-index: 20;
+    transition: all 500ms;
+  }
+  
+  header h2 {
+    color: #222;
+  }
+  header label span {
+    padding-right: 1rem;
+    cursor: pointer;
+  }
+  .user-wrapp {
+    display: flex;
+    align-items: center;
+  }
+  .user-wrapp img {
+    margin-right: 1rem;
+    border-radius: 50%;
+  }
+  .user-wrapp small {
+    display: inline-block;
+    color: gray;
+  }
+  /*close on small screen*/

@@ -7,17 +7,11 @@ import { HostelTable } from "../Components/Tables/HostelTbl";
 export default() => {
   return (
     <>
-      <section className="hostels-page">
-        <div className="home-header">
+      <input type="checkbox" id="nav-toggle" defaultChecked />
+      <SideBar active = "hostels" />
+      <div className="main_ctr">
           <Header />
-        </div>
-        <div>
-          <SideBar />
-        </div>
-        <div
-          className="home-body  "
-          style={{ maxHeight: "90vh", overflowY: "scroll" }}
-        >
+          <main>
           <div>
             <h2 style={{ color: "gray", textAlign: "center" }}> All Hostels</h2>
           </div>
@@ -25,8 +19,8 @@ export default() => {
           <div className="card">
             <HostelTable />
           </div>
-        </div>
-      </section>
+        </main>
+      </div>
     </>
   );
 };

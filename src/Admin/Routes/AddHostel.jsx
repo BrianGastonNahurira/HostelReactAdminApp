@@ -1,5 +1,4 @@
 import React from "react";
-import "../../Admin/Design/Home.css";
 import "../../Admin/Design/AddHostel.css";
 import { Button, TextField } from "@mui/material";
 import Header from "../Components/Header/Header";
@@ -8,16 +7,11 @@ import SideBar from "../Components/SideBar/SideBar";
 const AddHostel=() => {
   return (
     <>
-      <section className="addHostel-page">
-        <div className="home-header">
+      <input type="checkbox" id="nav-toggle" defaultChecked />
+        <SideBar active = "addhostel" />
+      <div className="main_ctr">
           <Header />
-        </div>
-        <div>
-          <SideBar />
-        </div>
-        <div
-          className="home-body "
-          style={{ maxHeight: "90vh", overflowY: "scroll" }}
+        <main
         >
           <h2 style={{ textAlign: "center", color: "gray" }}>
             Register A New Hostel
@@ -183,8 +177,8 @@ const AddHostel=() => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </main>
+      </div>
     </>
   );
 };

@@ -7,17 +7,11 @@ import { StateTable } from "../Components/Tables/Table";
 export default () => {
   return (
     <>
-      <section>
-        <div className="home-header">
+       <input type="checkbox" id="nav-toggle" defaultChecked />
+        <SideBar active = "bookings" />
+      <div className="main_ctr">
           <Header />
-        </div>
-        <div>
-          <SideBar />
-        </div>
-        <div
-          className="home-body  "
-          style={{ maxHeight: "90vh", overflowY: "scroll" }}
-        >
+          <main>
           <div>
             <h2 style={{ color: "gray", textAlign: "center" }}>
               {" "}
@@ -28,8 +22,8 @@ export default () => {
           <div className="card">
             <StateTable />
           </div>
+          </main>
         </div>
-      </section>
     </>
   );
 };

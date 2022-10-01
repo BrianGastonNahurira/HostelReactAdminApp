@@ -10,17 +10,11 @@ import SideBar from "../Components/SideBar/SideBar";
 const RegisterHostelOwners = () => {
   return (
     <>
-      <section className="registerOwners-page">
-        <div className="home-header">
+      <input type="checkbox" id="nav-toggle" defaultChecked />
+      <SideBar active = "reghostelowners" />
+      <div className="main_ctr">
           <Header />
-        </div>
-        <div>
-          <SideBar />
-        </div>
-        <div
-          className="home-body "
-          style={{ maxHeight: "90vh", overflowY: "scroll" }}
-        >
+        <main>
           <h2 style={{ textAlign: "center", color: "gray" }}>
             Register A New Hostel Owner
           </h2>
@@ -117,8 +111,8 @@ const RegisterHostelOwners = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </main>
+      </div>
     </>
   );
 };

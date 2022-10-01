@@ -18,14 +18,18 @@ span{
   display: flex;
   align-items: center;
   padding: 5px;
+  color: gray;
 }
 .icons p {
   padding-left: 7px;
 }
 .icons:hover {
   background-color: #727cf5;
-  color: white;
+  color: white !important;
 
+}
+.icons p:hover {
+  color: white;
 }
 @media screen and (max-width: 500px) {
   .sidebar {

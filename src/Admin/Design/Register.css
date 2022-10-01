@@ -17,3 +17,36 @@
   background-color: rgb(250, 247, 247);
 }
 /* rgb(203, 195, 195) */
+@media screen and (max-width: 500px) {
+  .registerform {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .home-body h2 {
+    margin-top: 14vh;
+  }
+  .description {
+    background-color: rgb(250, 247, 247);
+    /* background-color: white; */
+  }
+  img {
+    margin: 20px 0px 0px 20px !important;
+  }
+  .registerhostelowner {
+    /* background-color: white !important; */
+    background-color: rgb(250, 247, 247);
+  }
+  .submit-btn {
+    margin-left: 80px !important;
+  }
+  .reg-textfield {
+    left: 0px !important;
+    margin-left: 13px !important;
+    padding-left: 0px !important;
+    width: 90% !important;
+  }
+  .registerhostelowner div {
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+}

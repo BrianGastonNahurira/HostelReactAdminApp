@@ -14,7 +14,26 @@ import {
 } from "@mui/material";
 // import "../Statemets/statements.css";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const url = "http://localhost:5051/api/v6/allOwners";
+
 export const HostelOwnerTbl = () => {
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res);
+        setState(res.data.result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "500px" }}>
       <Table aria-aria-label="simple table" stickyHeader>
@@ -53,14 +72,14 @@ export const HostelOwnerTbl = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row) => (
+          {state.map((row) => (
             <TableRow
-              key={row.Name}
+              key={row.id}
               sx={{ "&:last-child td, &last-child th": { border: 0 } }}
             >
-              <TableCell>{row.Name}</TableCell>
-              <TableCell align="right"> {row.Hostel} </TableCell>
-              <TableCell align="right">{row.Tel}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell align="right"> {row.hostel} </TableCell>
+              <TableCell align="right">{row.phone_number}</TableCell>
             </TableRow>
           ))}
         </TableBody>

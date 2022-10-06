@@ -1,3 +1,4 @@
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import Avatar from "..//..//../assets/profileimg.png";
 
@@ -48,6 +49,63 @@ const Header=()=>{
           </div>
         </div>
         </header>
+
+      <Menu
+        id="reception-actions"
+        anchorEl={AnchorEl}
+        keepMounted
+        disableScrollLock={true}
+        open={Boolean(AnchorEl)}
+        onClose={handleCloseActions}
+      >
+        <MenuItem onClick={handleCloseActions}>
+          <span style={{ fontSize: 24, marginRight: 10 }}>
+         <i className="las la-user-alt"></i>
+          </span>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={handleClickOpenDialog}>
+          <span style={{ fontSize: 24, marginRight: 10 }}>
+         <i className="las la-sign-out-alt"></i>
+          </span>
+          Log out
+        </MenuItem>
+      </Menu>
+
+      <Dialog
+        open={open}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Log Out</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Would like to Log Out. Click 'Cancel' to close, Log Out to Continue
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            autoFocus
+            onClick={() => {
+              const token_stored = localStorage.getItem("token");
+              if (token_stored) {
+                localStorage.removeItem("token");
+              } else {
+                sessionStorage.removeItem("token");
+              }
+              window.location.replace("/");
+            }}
+          >
+            Log Out
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
 
     );

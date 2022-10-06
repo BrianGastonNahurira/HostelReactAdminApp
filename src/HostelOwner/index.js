@@ -5,7 +5,7 @@ import NotFound from "../components/NotFound/404";
 import Bookings from "./Routes/Bookings";
 import Home from "./Routes/Home";
 
-export default function HostelOwner(){
+export default()=>{
   return (
     <BrowserRouter>
       <Routes>

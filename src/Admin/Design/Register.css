@@ -1,6 +1,7 @@
-.registerform {
+.registerform{
   display: flex;
   flex: 2;
+
 }
 
 .description {
@@ -9,14 +10,15 @@
 .form {
   flex: 1;
   margin: 0px 40px 20px 40px;
+
 }
 .registerhostelowner {
-  /* padding: 30px; */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  background-color: rgb(250, 247, 247);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
 }
-/* rgb(203, 195, 195) */
 @media screen and (max-width: 500px) {
   .registerform {
     display: grid;
@@ -33,8 +35,8 @@
     margin: 20px 0px 0px 20px !important;
   }
   .registerhostelowner {
-    /* background-color: white !important; */
     background-color: rgb(250, 247, 247);
+    
   }
   .submit-btn {
     margin-left: 80px !important;

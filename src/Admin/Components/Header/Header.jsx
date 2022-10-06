@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 // import "../Drawables/passport.jpeg";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "../Header/Header.css";
-import ReorderIcon from "@mui/icons-material/Reorder";
+import Logout from "../../../components/Login/Login";
 import Avatar from "..//..//../assets/profileimg.png";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Menu, MenuItem } from "@mui/material";
 
 
 const Header = () => {
@@ -51,38 +51,64 @@ const Header = () => {
         </div>
       </div>
       </header>
-  </>
-    // <div className="header-ctr card">
-    //   <div className="beaconLogo" style={{ marginLeft: "5px" }}>
-    //     <div className="div-bar">
-    //       <ReorderIcon
-    //         className="bars"
-    //         fontSize="large"
-    //         style={{
-    //           color: "gray",
-    //           padding: "10px",
-    //           marginTop: "7px",
-    //         }}
-    //       />
-    //     </div>
-    //     <div className="beaconadminlogo">
-    //       <h2>BeaconAdmin</h2>
-    //     </div>
-    //   </div>
-    //   <div
-    //     className="userdetails"
-    //     style={{
-    //       padding: "7px",
-    //       marginTop: "8px",
-    //       display: "flex",
-    //       color: "gray",
-    //       justifyContent: "center",
-    //     }}
-    //   >
-    //     <AccountCircleIcon fontSize="large" style={{ marginTop: "0px" }} />
-    //     <p>Gaston</p>
-    //   </div>
-    // </div>
+
+      <Menu
+        id="reception-actions"
+        anchorEl={AnchorEl}
+        keepMounted
+        disableScrollLock={true}
+        open={Boolean(AnchorEl)}
+        onClose={handleCloseActions}
+      >
+        <MenuItem onClick={handleCloseActions}>
+          <span style={{ fontSize: 24, marginRight: 10 }}>
+         <i className="las la-user-alt"></i>
+          </span>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={handleClickOpenDialog}>
+          <span style={{ fontSize: 24, marginRight: 10 }}>
+         <i className="las la-sign-out-alt"></i>
+          </span>
+          Log out
+        </MenuItem>
+      </Menu>
+
+      <Dialog
+        open={open}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Log Out</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Would like to Log Out. Click 'Cancel' to close, Log Out to Continue
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            autoFocus
+            onClick={() => {
+              const token_stored = localStorage.getItem("token");
+              if (token_stored) {
+                localStorage.removeItem("token");
+              } else {
+                sessionStorage.removeItem("token");
+              }
+              window.location.replace("/");
+            }}
+          >
+            Log Out
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </>
   );
 };
 export default Header;

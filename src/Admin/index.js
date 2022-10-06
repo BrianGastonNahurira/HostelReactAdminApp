@@ -7,16 +7,14 @@ import HostelOwners from "./Routes/ViewOwners";
 import  RegisterHostelOwners from "./Routes/RegisterOwners";
 import Hostels from "./Routes/Hostels"
 import SideBar from "./Components/SideBar/SideBar";
-import Login from "../components/Login/Login";
 import Bookings from "./Routes/Bookings";
 import PendingHostel from "./Routes/PendingHostel";
 import AddHostel from "./Routes/AddHostel";
 
-export const Index = () => {
+export default() => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
         <Route path="/sidebar" element={<SideBar />} />
         <Route path="/" element={<Home />} />
         {/* <Route path="/table" element={<StateTable />} /> */}

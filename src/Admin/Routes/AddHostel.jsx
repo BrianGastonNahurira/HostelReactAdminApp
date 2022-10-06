@@ -1,12 +1,115 @@
-import React from "react";
+import React,{useState} from "react";
 import "../../Admin/Design/AddHostel.css";
-import { Button, TextField } from "@mui/material";
+import { Button, Snackbar, TextField } from "@mui/material";
 import Header from "../Components/Header/Header";
 import SideBar from "../Components/SideBar/SideBar";
+import { Link } from "react-router-dom";
+import FileUpload from "../../api/files";
+import { Alert as MuiAlert, Slide } from "@mui/material";
+import FormsApi from "../../api/api";
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const AddHostel=() => {
+  const [state, setState] = useState({
+    step: 1,
+    fieldsError: false,
+    mui: {
+      snackBarOpen: false,
+      snackBarMessage: "",
+      snackBarStatus: "info",
+      snackBarPosition: { vertical: "top", horizontal: "right" },
+    },
+  });
+
+  const submitHostelInfo = async (e) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      mui: {
+        ...state.mui,
+        snackBarMessage: "Please Wait...",
+        snackBarStatus: "info",
+        snackBarOpen: true,
+      },
+    });
+    let fd = new FormData(e.target);
+    let form_contents = {};
+    fd.forEach((value, name) => {
+    form_contents[name] = value;
+    });
+    let api = new FormsApi();
+    let res = await api.post("/newhostel", form_contents);
+    if(res.data ==="Hostel Exists"){
+      setState({
+        ...state,
+        mui: {
+          ...state.mui,
+          snackBarMessage: res.data,
+          snackBarStatus: "warning",
+          snackBarOpen: true,
+        },
+      });
+    }else if(res.status === false){
+      setState({
+        ...state,
+        mui: {
+          ...state.mui,
+          snackBarMessage: res.data,
+          snackBarStatus: "warning",
+          snackBarOpen: true,
+        },
+      });
+    }else{
+      setState({
+        ...state,
+        step: 2,
+        hostel_id: res.result.id,
+        mui: {
+          ...state.mui,
+          snackBarMessage: res.data,
+          snackBarStatus: "success",
+          snackBarOpen: true,
+        },
+      });
+    }
+}
+const handleClose = (event, reason) => {
+  if (reason === "clickaway") {
+    return;
+  }
+  setState({
+    ...state,
+    mui: {
+      ...state.mui,
+      snackBarMessage: "",
+      snackBarOpen: false,
+      snackBarStatus: "info",
+    },
+  });
+};
   return (
     <>
+      <Snackbar
+        open={state.mui.snackBarOpen}
+        anchorOrigin={state.mui.snackBarPosition}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        message={state.mui.snackBarMessage}
+        TransitionComponent={(props) => <Slide {...props} direction="down" />}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={state.mui.snackBarStatus}
+          sx={{ width: "100%" }}
+        >
+          {state.mui.snackBarMessage}
+        </Alert>
+      </Snackbar>
+
       <input type="checkbox" id="nav-toggle" defaultChecked />
         <SideBar active = "addhostel" />
       <div className="main_ctr">
@@ -16,164 +119,180 @@ const AddHostel=() => {
           <h2 style={{ textAlign: "center", color: "gray" }}>
             Register A New Hostel
           </h2>
-          <div className="hostelform  card ">
-            <div className="description-form">
-              <h4 style={{ color: "gray", marginLeft: "3vh" }}>Hostel Form</h4>
-              <div
-                className="detail-field"
-                style={{
-                  border: "1px solid gray",
-                  padding: "20px",
-                  margin: "10px",
-                }}
-              >
-                <div style={{ justifyContent: "space-around" }}>
-                  <TextField
-                    color="primary"
-                    label="Hostel Name"
-                    style={{ width: "45%" }}
-                    variant="outlined"
-                    name="hostel_name"
-                    type="text"
-                  />
-                  <TextField
-                    color="primary"
-                    label="Distance from University"
-                    style={{ width: "45%", marginLeft: "25px" }}
-                    variant="outlined"
-                    name="dist_fron_uni"
-                    type="text"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    color="primary"
-                    label="Hostel Description"
-                    style={{ width: "95%", margin: "30px 0px 0px 0px" }}
-                    variant="outlined"
-                    name="hostel_des"
-                    type="text"
-                  />
-                </div>
-                <div
-                  style={{ justifyContent: "space-around", paddingTop: "30px" }}
-                >
-                  <TextField
-                    color="primary"
-                    label="Amount For Single Room"
-                    style={{ width: "45%" }}
-                    variant="outlined"
-                    name="single_room"
-                    type="text"
-                  />
-                  <TextField
-                    color="primary"
-                    label="Amount For Double Room"
-                    style={{ width: "45%", marginLeft: "25px" }}
-                    variant="outlined"
-                    name="double_room"
-                    type="text"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    color="primary"
-                    label="Telephone Number"
-                    style={{ width: "65%", margin: "30px 0px 0px 50px" }}
-                    variant="outlined"
-                    name="tel"
-                    type="number"
-                  />
-                </div>
-                <div
-                  style={{ justifyContent: "space-around", paddingTop: "30px" }}
-                >
-                  <TextField
-                    color="primary"
-                    label="Single Rooms Available"
-                    style={{ width: "45%" }}
-                    variant="outlined"
-                    name="single_room_no"
-                    type="number"
-                  />
-                  <TextField
-                    color="primary"
-                    label="Double Rooms Available"
-                    style={{ width: "45%", marginLeft: "25px" }}
-                    variant="outlined"
-                    name="double_room_no"
-                    type="number"
-                  />
-                </div>
-                <div
-                  style={{ justifyContent: "space-around", paddingTop: "30px" }}
-                >
-                  <TextField
-                    color="primary"
-                    label="Booking Fee"
-                    style={{ width: "45%" }}
-                    variant="outlined"
-                    name="booking_fee"
-                    type="number"
-                  />
-                  <TextField
-                    color="primary"
-                    label="Account Number"
-                    style={{ width: "45%", marginLeft: "25px" }}
-                    variant="outlined"
-                    name="account_no"
-                    type="number"
-                  />
-                </div>
-                <Button
-                  variant="contained"
-                  style={{
-                    padding: "5px 25px 5px 25px",
-                    margin: "30px 0px 0px 180px",
-                  }}
-                >
-                  SUBMIT
-                </Button>
+          <div className="main-ctr card">
+            <div className="pdts-header-btns">
+              <div>
+                <h2>New Hostel</h2>
               </div>
             </div>
-            <div className="image-form">
-              <h4 style={{ color: "gray", marginLeft: "3vh" }}>Image Form</h4>
-
-              <div
-                className="image-field"
-                style={{
-                  border: "1px solid gray",
-                  padding: "20px",
-                  margin: "10px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  style={{
-                    padding: "15px 25px 15px 25px",
-                    margin: "5px 0px 5px 5px",
-                  }}
+            <div className="progress_bar_new_product">
+            </div>
+            <div className="pdts-form-ctr">
+              <div className="new_product_form">
+                <form
+                  onSubmit={submitHostelInfo}
+                  className="inputs_ctr"
                 >
-                  UPLOAD HOSTEL IMAGES
-                </Button>
+                  <div style={{ marginBlock: 10, fontWeight: "bold" }}>
+                    Hostel Information
+                  </div>
+                  <div className="inputs_ctr_border">
+                    <input
+                      type="text"
+                      name="seller"
+                      hidden
+                      onChange={() => {}}
+                    />
+                    <div className="inputs_ctr_flex">
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Hostel Name"
+                        name="hostel_name"    
+                        style={{ width: "45%" }}
+                        // error={state.fieldsError}
+                        // helperText={
+                        //   state.fieldsError
+                        //     ? "This field maybe empty, but its required"
+                        //     : ""
+                        // }
+                      />
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Distance from University"
+                        name="hostel_distance"
+                        type="text"
+                        style={{ width: "45%" }}
+                        // error={state.fieldsError}
+                        // helperText={
+                        //   state.fieldsError
+                        //     ? "This field maybe empty, but its required"
+                        //     : ""
+                        // }
+                      />
+                    </div>
+                    <div className="inputs_ctr_fullwidth">
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Hostel Description"
+                        name="hostel_description"    
+                        style={{ width: "100%" }}
+                      />
+                    </div>
+                    <div className="inputs_ctr_flex">
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Amount For Single Room(UGX)"
+                        name="single_room_amount"
+                        type="number"
+                        style={{ width: "45%" }}
+                        // error={state.fieldsError}
+                        // helperText={
+                        //   state.fieldsError
+                        //     ? "This field maybe empty, but its required"
+                        //     : ""
+                        // }
+                      />
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Amount For Double Room"
+                        name="double_room_amount"
+                            style={{ width: "45%" }}
+                      />
+                    </div>
+                    <div className="inputs_ctr_fullwidth">
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Telephone Number"
+                        name="telphone_number"    
+                        style={{ width: "100%" }}
+                      />
+                    </div>
+                    <div className="inputs_ctr_flex">
+                      <TextField
+                        required
+                        variant="outlined"
+                        label="Single Rooms Available"
+                        name="single_rooms_available"    
+                        color="primary"
+                        style={{ width: "45%" }}
+                        // error={state.fieldsError}
+                        // helperText={
+                        //   state.fieldsError
+                        //     ? "This field maybe empty, but its required"
+                        //     : ""
+                        // }
+                      />
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Double Rooms Available"
+                        name="double_rooms_available"    
+                        type="number"
+                        style={{ width: "45%" }}
+                        // error={state.fieldsError}
+                        // helperText={
+                        //   state.fieldsError
+                        //     ? "This field maybe empty, but its required"
+                        //     : ""
+                        // }
+                      />
+                    </div>
+                    <div className="inputs_ctr_flex">
+                      <TextField
+                        required
+                        variant="outlined"
+                        label="Booking Fee"
+                        name="booking_fee"
+                        color="primary"
+                        multiline
+                        style={{ width: "45%" }}
+                      />
+                         <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Account Number"
+                        name="hostel_account_no"
+                        multiline
+                        style={{ width: "45%" }}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      marginTop: 20,
+                    }}
+                  >
+                    <Button variant="outlined" color="primary" type="submit">
+                      Submit Hostel
+                    </Button>
+                  </div>
+                </form>
                 <div
-                  style={{
-                    border: "1px solid gray",
-                    padding: "10px",
-                    marginTop: "10px",
-                  }}
+                  className="inputs_ctr"
+                  // style={
+                  //   state.step === 1
+                  //     ? { opacity: "0.4", pointerEvents: "none" }
+                  //     : {}
+                  // }
                 >
-                  No images Choosen
+                  <FileUpload/>
                 </div>
-                <Button
-                  variant="contained"
-                  style={{
-                    padding: "10px 5px 5px 10px",
-                    margin: "25px 0px 5px 5px",
-                  }}
-                >
-                  SUBMIT HOSTEL IMAGES
-                </Button>
               </div>
             </div>
           </div>

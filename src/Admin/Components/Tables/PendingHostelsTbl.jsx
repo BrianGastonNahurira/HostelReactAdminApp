@@ -1,4 +1,6 @@
 import React from "react";
+
+import { useNavigate } from "react-router-dom";
 import {
   TableContainer,
   Table,
@@ -18,6 +20,7 @@ const url = "http://localhost:5051/api/v6/pendinghostel";
 
 export const PendingTbl = () => {
   const [state, setState] = useState([]);
+  console.log(state);
 
   useEffect(() => {
     axios
@@ -38,6 +41,8 @@ export const PendingTbl = () => {
       .then((res) => alert("Hostel Deleted"))
       .catch((err) => console.log(err));
   };
+
+  const navigate = useNavigate();
 
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "500px" }}>
@@ -107,7 +112,12 @@ export const PendingTbl = () => {
                 <h4 style={{ color: "brown" }}>EDIT</h4>
               </TableCell>
               <TableCell align="center">
-                <h4 style={{ color: "green" }}>CONFIRM</h4>
+                <Button
+                  style={{ color: "green" }}
+                  onClick={() => navigate("/addhostel", { replace: row.id })}
+                >
+                  EDIT T
+                </Button>
               </TableCell>
               <TableCell align="center">
                 <Button
@@ -127,77 +137,3 @@ export const PendingTbl = () => {
     </TableContainer>
   );
 };
-const tableData = [
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-];

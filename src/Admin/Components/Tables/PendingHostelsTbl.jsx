@@ -1,4 +1,6 @@
 import React from "react";
+
+import { useNavigate } from "react-router-dom";
 import {
   TableContainer,
   Table,
@@ -9,8 +11,39 @@ import {
   Paper,
 } from "@mui/material";
 // import "../Statemets/statements.css";
+import { Button } from "@mui/material";
+
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const url = "http://localhost:5051/api/v6/pendinghostel";
 
 export const PendingTbl = () => {
+  const [state, setState] = useState([]);
+  console.log(state);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => {
+        console.log("wjqwh");
+        setState(res.data.result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  const postDelete = (id, e) => {
+    e.preventDefault();
+    axios
+      .delete(`http://localhost:5051/api/v6/deletehostel/${id}`)
+      .then((res) => alert("Hostel Deleted"))
+      .catch((err) => console.log(err));
+  };
+
+  const navigate = useNavigate();
+
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "500px" }}>
       <Table aria-aria-label="simple table" stickyHeader>
@@ -26,7 +59,7 @@ export const PendingTbl = () => {
             >
               Name
             </TableCell>
-            <TableCell
+            {/* <TableCell
               style={{
                 color: "blue",
                 fontWeight: "bolder",
@@ -34,7 +67,7 @@ export const PendingTbl = () => {
               }}
             >
               Hostel
-            </TableCell>
+            </TableCell> */}
             <TableCell
               style={{
                 color: "blue",
@@ -68,21 +101,34 @@ export const PendingTbl = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row) => (
+          {state.map((row) => (
             <TableRow
-              key={row.Name}
+              key={row.id}
               sx={{ "&:last-child td, &last-child th": { border: 0 } }}
             >
-              <TableCell>{row.Name}</TableCell>
-              <TableCell>{row.Hostel}</TableCell>
+              <TableCell>{row.hostel_name}</TableCell>
+              {/* <TableCell>{row.hostel}</TableCell> */}
               <TableCell align="center">
                 <h4 style={{ color: "brown" }}>EDIT</h4>
               </TableCell>
               <TableCell align="center">
-                <h4 style={{ color: "green" }}>CONFIRM</h4>
+                <Button
+                  style={{ color: "green" }}
+                  onClick={() => navigate("/addhostel", { replace: row.id })}
+                >
+                  EDIT T
+                </Button>
               </TableCell>
               <TableCell align="center">
-                <h4 style={{ color: "red" }}>DELETE</h4>
+                <Button
+                  style={{ color: "red" }}
+                  onClick={(e) => postDelete(row.id, e)}
+                >
+                  DELETE
+                </Button>
+                {/* <h4 style={{ color: "red" }} variant="contained">
+                  DELETE
+                </h4> */}
               </TableCell>
             </TableRow>
           ))}
@@ -91,77 +137,3 @@ export const PendingTbl = () => {
     </TableContainer>
   );
 };
-const tableData = [
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-];

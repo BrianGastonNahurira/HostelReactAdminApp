@@ -111,11 +111,10 @@ const handleClose = (event, reason) => {
       </Snackbar>
 
       <input type="checkbox" id="nav-toggle" defaultChecked />
-        <SideBar active = "addhostel" />
+      <SideBar active="addhostel" />
       <div className="main_ctr">
-          <Header />
-        <main
-        >
+        <Header />
+        <main>
           <h2 style={{ textAlign: "center", color: "gray" }}>
             Register A New Hostel
           </h2>

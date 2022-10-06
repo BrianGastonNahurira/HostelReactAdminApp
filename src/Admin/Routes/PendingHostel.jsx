@@ -4,18 +4,18 @@ import Header from "../Components/Header/Header";
 import SideBar from "../Components/SideBar/SideBar";
 import { PendingTbl } from "../Components/Tables/PendingHostelsTbl";
 
-export default() => {
+export default () => {
   return (
     <>
-       <input type="checkbox" id="nav-toggle" defaultChecked />
-      <SideBar active = "pendinghostels" />
+      <input type="checkbox" id="nav-toggle" defaultChecked />
+      <SideBar active="pendinghostels" />
       <div className="main_ctr">
-          <Header />
+        <Header />
         <main>
           <div>
             <h2 style={{ color: "gray", textAlign: "center" }}>
               {" "}
-              ALl Current Bookings
+              Pending Hostels
             </h2>
           </div>
 

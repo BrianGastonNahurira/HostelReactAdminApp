@@ -21,6 +21,39 @@
 .new_product_form {
   display: flex !important;
 }
+.pdts-header-btns {
+  padding: 5px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.pdts-grid-ctr {
+  padding: 20px 15px;
+}
+
+/**
+styles for new product
+*/
+.pdts-form-ctr {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 10px 15px;
+  padding: 15px;
+  border-radius: 5px;
+}
+.progress_bar_new_product {
+  margin: 10px 15px;
+  border-radius: 5px;
+  height: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all 1.2s ease-in;
+}
+.progress_bar_new_product > div {
+  background-color: #85b811;
+  height: 100%;
+  border-radius: 5px;
+}
+.new_product_form {
+  display: flex !important;
+}
 .inputs_ctr {
   flex: 1.5;
 }
@@ -35,12 +68,6 @@
   justify-content: space-between;
   padding: 15px 20px;
 }
-.pdts-form-ctr {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  margin: 10px 15px;
-  padding: 15px;
-  border-radius: 5px;
-}
 .inputs_ctr_border {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -51,6 +78,12 @@
 .inputs_ctr_halfwidth {
   padding: 15px 20px;
 }
+.new_pdt_btn_refs_ctr {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
 /*styles for image preview*/
 .images__preview_ctr {
   padding: 5px;
@@ -75,6 +108,7 @@
   width: 100%;
   height: 100%;
 }
+
 
 @media screen and (max-width: 500px) {
   .hostelform {

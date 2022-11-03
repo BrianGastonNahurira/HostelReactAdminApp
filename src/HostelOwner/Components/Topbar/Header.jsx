@@ -1,8 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import Avatar from "..//..//../assets/profileimg.png";
-
+import user from "../../../app.config";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 const Header=()=>{
     const [AnchorEl, setAnchorEl] = useState(null);
@@ -13,6 +14,9 @@ const Header=()=>{
       const handleCloseActions = () => {
         setAnchorEl(null);
       };
+      const openProfile = ()=>{
+        <Link to = "/profile"/>
+      }
     
       const handleClickOpenDialog = () => {
         setOpen(true);
@@ -43,8 +47,8 @@ const Header=()=>{
           >
             <img src={Avatar} alt="" width="40px" height="40px" />
             <div className="">
-              <h4>JAMES</h4>
-              <small>Admin</small>
+              <h4>{user ? `${user.name.split(" ")[0]}` : "Username"}</h4>
+              <small>{user.role}</small>
             </div>
           </div>
         </div>
@@ -58,12 +62,14 @@ const Header=()=>{
         open={Boolean(AnchorEl)}
         onClose={handleCloseActions}
       >
-        <MenuItem onClick={handleCloseActions}>
+        <Link to ="/profile">
+        <MenuItem>
           <span style={{ fontSize: 24, marginRight: 10 }}>
          <i className="las la-user-alt"></i>
           </span>
           Profile
         </MenuItem>
+        </Link>
         <MenuItem onClick={handleClickOpenDialog}>
           <span style={{ fontSize: 24, marginRight: 10 }}>
          <i className="las la-sign-out-alt"></i>

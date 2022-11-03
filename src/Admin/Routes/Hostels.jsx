@@ -1,6 +1,6 @@
 import React from "react";
 import "../../Admin/Design/Home.css";
-import FormsApi from "../../API/api";
+// import FormsApi from "../../api/api";
 import Header from "../Components/Header/Header";
 import SideBar from "../Components/SideBar/SideBar";
 import { HostelTable } from "../Components/Tables/HostelTbl";

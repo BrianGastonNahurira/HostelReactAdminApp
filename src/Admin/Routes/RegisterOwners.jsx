@@ -38,7 +38,7 @@ const RegisterHostelOwners = () => {
       form_content[key] = value;
     });
     let api = new FormsApi();
-    let res = await api.post("/registerhostelowner", form_content);
+    let res = await api.post("/newlandlord", form_content);
     if (res.data === "Email") {
       setApiEmailUsed(true);
       setState({

@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
+	databaseURL: process.env.REACT_DATABASE_URL,
 	apiKey: process.env.REACT_APP_API_KEY,
 	authDomain: process.env.REACT_APP_AUTH_DOMAIN,
 	projectId: process.env.REACT_APP_PROJECT_ID,
@@ -12,7 +13,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, process.env.REACT_APP_BUCKET_URL);
-export default storage;
+export { storage };
+
 
 
 

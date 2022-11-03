@@ -114,7 +114,7 @@ export const PendingTbl = () => {
               <TableCell align="center">
                 <Button
                   style={{ color: "green" }}
-                  onClick={() => navigate("/addhostel", { replace: row.id })}
+                  onClick={() => navigate("/hostel/:id", { replace: row.id })}
                 >
                   EDIT T
                 </Button>

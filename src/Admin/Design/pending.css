@@ -1,0 +1,35 @@
+
+  .hostels-grid-ctr {
+    padding: 5px 15px;
+    display: flex;
+  }
+  .hostels-grid-ctr > div > span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .hostels-grid-ctr > div:nth-child(1) {
+    flex: 1;
+    margin-right: 10px;
+  }
+  .hostels-grid-ctr > div:nth-child(2) {
+    flex: 1;
+    margin-left: 10px;
+  }
+  .hostels-grid-ctr table,
+  .full-width-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: left;
+  }
+  .hostels-grid-ctr table thead {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .hostels-grid-ctr table thead th {
+    padding: 10px 0px;
+    font-weight: 500;
+  }
+  .hostels-grid-ctr table tbody td {
+    padding: 10px 0px;
+  }

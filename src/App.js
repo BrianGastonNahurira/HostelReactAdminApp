@@ -11,7 +11,7 @@ import NotFound from "./components/NotFound/404";
 const App = () =>
   user.role === "admin" ? (
     <Admin />
-  ) : user.role === "hostelowner" ? (
+  ) : user.role === "landlord" ? (
     <HostelOwner />
   ) : (
     <StartStack />

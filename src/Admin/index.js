@@ -10,6 +10,7 @@ import SideBar from "./Components/SideBar/SideBar";
 import Bookings from "./Routes/Bookings";
 import PendingHostel from "./Routes/PendingHostel";
 import AddHostel from "./Routes/AddHostel";
+import Hostel from "./Routes/hostel";
 
 export default() => {
   return (
@@ -20,6 +21,7 @@ export default() => {
         {/* <Route path="/table" element={<StateTable />} /> */}
         <Route path="/addhostel" element={<AddHostel />} />
         <Route path="/hostels" element={<Hostels />} />
+        <Route path="onehostel/:id" element={<Hostel />} />
         <Route path="/hostelowners" element={<HostelOwners />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/pendinghostels" element={<PendingHostel />} />

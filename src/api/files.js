@@ -1,66 +1,151 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import storage from "./firebase";
+import { storage } from "./firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { Button } from "@mui/material";
+import { Alert as MuiAlert, Slide, Button, Snackbar } from "@mui/material";
+import FormsApi from "./api";
 
+export default ({ hostel, confirming }) => {
+  const nav = useNavigate();
+  const fileInput = useRef();
+  const [images, setImages] = useState([]);
+  const [urls, setUrls] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [images_sent, set_images_sent] = useState(false);
+  const [mui, setMui] = useState({
+    snackBarOpen: false,
+    snackBarMessage: "",
+    snackBarStatus: "info",
+    snackBarPosition: { vertical: "top", horizontal: "right" },
+  });
 
+  const handleChange = (e) => {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newImage = e.target.files[i];
+      newImage["id"] = Math.random();
+      setImages((prevState) => [...prevState, newImage]);
+    }
+  };
 
-export default()=>{
-    const nav = useNavigate();
-    const fileInput = useRef();
-    const [images, setImages] = useState([]);
-    const [urls, setUrls] = useState([]);  
-    const [progress, setProgress] = useState(0);
-    const [images_sent, set_images_sent] = useState(false);
-
-    const handleChange = (e) => {
-        for (let i = 0; i < e.target.files.length; i++) {
-          const newImage = e.target.files[i];
-          newImage["id"] = Math.random();
-          setImages((prevState) => [...prevState, newImage]);
-        }
-      };
-
-      const handleUpload = () => {
-        // setMui({
-        //   ...mui,
-        //   snackBarMessage: `Uploading Images....`,
-        //   snackBarStatus: "info",
-        //   snackBarOpen: true,
-        // });
-        const promises = [];
-        images.map((image) => {
-          const storageRef = ref(storage, `/images/${image.name}`);
-          const uploadTask = uploadBytesResumable(storageRef, image);
-          promises.push(uploadTask);
-          uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-              const progress = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              );
-              // setProgress(progress);
-            },
-            (error) => {
-              console.log(error);
-            },
-            async () => {
-              await getDownloadURL(uploadTask.snapshot.ref).then((urls) => {
-                setUrls((prevState) => [...prevState, urls]);
-              });
-            }
+  const handleUpload = () => {
+    setMui({
+      ...mui,
+      snackBarMessage: `Uploading Images....`,
+      snackBarStatus: "info",
+      snackBarOpen: true,
+    });
+    const promises = [];
+    images.map((image) => {
+      //   const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      const storageRef = ref(storage, `/images/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+      promises.push(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
+          // setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await getDownloadURL(uploadTask.snapshot.ref).then((urls) => {
+            setUrls((prevState) => [...prevState, urls]);
+          });
+        }
+      );
+    });
+
+
+
+
+    Promise.all(promises)
+      .then(() => {
+        // alert("All images uploaded");
+
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(async () => {
+    if (urls.length === images.length && urls.length !== 0) {
+      let res = await new FormsApi().put(`/edit/${hostel}`, {
+        hostel_images: urls,
+      });
+      if (res !== "Error") {
+        if (res.status === true) {
+          setMui({
+            ...mui,
+            snackBarMessage: "Hostel Images Added.....",
+            snackBarStatus: "success",
+            snackBarOpen: true,
+          });
+          if (confirming) {
+            window.location.reload();
+          } else {
+            setTimeout(() => {
+              nav("/hostels");
+            }, 3000);
+          }
+        } else {
+          setMui({
+            ...mui,
+            snackBarMessage: "Some Error Occurred, Try again later...",
+            snackBarStatus: "error",
+            snackBarOpen: true,
+          });
+        }
+      } else {
+        setMui({
+          ...mui,
+          snackBarMessage: "Unable to Reach Server, Try again later...",
+          snackBarStatus: "error",
+          snackBarOpen: true,
         });
-    
-        Promise.all(promises)
-          .then(() => {
-            // alert("All images uploaded");
-          })
-          .catch((err) => console.log(err));
-      };
-    return(
+      }
+    }
+  }, [urls]);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  /**
+   *
+   * Method below handles closing of the MUI alert
+   */
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setMui({
+      ...mui,
+      snackBarMessage: "",
+      snackBarOpen: false,
+      snackBarStatus: "info",
+    });
+  };
+
+  return (
     <>
+      <Snackbar
+        open={mui.snackBarOpen}
+        anchorOrigin={mui.snackBarPosition}
+        onClose={handleClose}
+        message={mui.snackBarMessage}
+        TransitionComponent={(props) => <Slide {...props} direction="down" />}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={mui.snackBarStatus}
+          sx={{ width: "100%" }}
+        >
+          {mui.snackBarMessage}
+        </Alert>
+      </Snackbar>
       <div className="inputs_ctr">
         <div style={{ marginBlock: 10, fontWeight: "bold" }}>
           Hostel Images
@@ -98,7 +183,7 @@ export default()=>{
                   let src = URL.createObjectURL(v);
                   return (
                     <div key={i}>
-                      <img src={src} alt="PlusProductImage" />
+                      <img src={src} alt="HostelImage" />
                     </div>
                   );
                 })}
@@ -117,14 +202,15 @@ export default()=>{
         </div>
       </div>
     </>
-    );
-}
-export const UploadSingle = ({ type, onSuccess, image_url }) => {
-    const fileInput = useRef();
-    const [url, setUrl] = useState(image_url);
-    const [progress, setProgress] = useState(0);
+  );
+};
 
-const handleUpload = (e) => {
+export const UploadSingle = ({ type, onSuccess, image_url }) => {
+  const fileInput = useRef();
+  const [url, setUrl] = useState(image_url);
+  const [progress, setProgress] = useState(0);
+
+  const handleUpload = (e) => {
     const image = e.target.files[0];
     const storageRef = ref(storage, `/images/${type}/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
@@ -148,9 +234,9 @@ const handleUpload = (e) => {
     );
   };
 
-    return(
-        <>
-          <div className="inputs_ctr">
+  return (
+    <>
+      <div className="inputs_ctr">
         <div style={{ marginBlock: 10, fontWeight: "bold" }}></div>
         <div className="inputs_ctr_border">
           <div className="new_pdt_btn_refs_ctr">
@@ -166,7 +252,7 @@ const handleUpload = (e) => {
           <div className="images__preview_ctr">
             <div>
               {url ? (
-                <img src={url} alt="PlusCategoryImage" />
+                <img src={url} alt="Beaconroom Images" />
               ) : (
                 <div
                   style={{
@@ -185,6 +271,6 @@ const handleUpload = (e) => {
           </div>
         </div>
       </div>
-        </>
-    );
-}
+    </>
+  );
+};

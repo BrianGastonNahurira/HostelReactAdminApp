@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDom from "react-dom/client";
+import ReactDom from "react-dom";
 import "@fontsource/ubuntu";
 import "@fontsource/lato";
 
@@ -22,7 +22,8 @@ const AppWithTheme = () => (
     <App />
   </ThemeProvider>
 );
-const root = ReactDom.createRoot(document.getElementById('root'));
-root.render(<AppWithTheme />);
+
+ReactDom.render(<AppWithTheme />, document.getElementById("root"));
+
 
 

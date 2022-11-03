@@ -1,13 +1,13 @@
 import React,{useState} from "react";
 import "../../Admin/Design/AddHostel.css";
 import { Button, Snackbar, TextField } from "@mui/material";
-import Header from "../Components/Header/Header";
-import SideBar from "../Components/SideBar/SideBar";
 import FileUpload from "../../api/files";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert as MuiAlert, Slide } from "@mui/material";
-import FormsApi from "../../api/api";
 import user from "../../app.config";
+import Sidebar from "../Components/sidebar/Sidebar";
+import Header from "../Components/Topbar/Header";
+import FormsApi from "../../api/api";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -124,7 +124,7 @@ const handleClose = (event, reason) => {
       </Snackbar>
 
       <input type="checkbox" id="nav-toggle" defaultChecked />
-      <SideBar active="addhostel" />
+      <Sidebar active="addhostel" />
       <div className="main_ctr">
         <Header />
         <main>

@@ -4,6 +4,7 @@ import "../Header/Header.css";
 import Logout from "../../../components/Login/Login";
 import Avatar from "..//..//../assets/profileimg.png";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Menu, MenuItem } from "@mui/material";
+import user from "..//../../app.config";
 
 
 const Header = () => {
@@ -45,8 +46,8 @@ const Header = () => {
         >
           <img src={Avatar} alt="" width="40px" height="40px" />
           <div className="">
-            <h4>JAMES</h4>
-            <small>Admin</small>
+            <h4>{user ? `${user.name.split(" ")[0]}` : "Username"}</h4>
+            <small>{user.user.role}</small>
           </div>
         </div>
       </div>

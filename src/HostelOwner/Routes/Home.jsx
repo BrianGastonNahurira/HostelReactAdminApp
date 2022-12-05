@@ -5,6 +5,7 @@ import Sidebar from "../Components/sidebar/Sidebar"
 import Header from "../Components/Topbar/Header";
 import "./designs/home.css";
 import FormsApi from "../../api/api";
+import user from "../../app.config";
 
 const Home=()=>{
   const [state, setState] = useState({
@@ -63,22 +64,28 @@ const handleOpenActionsRooms = (e) => {
         AnchorElRooms: e.currentTarget });
       };
 
-  useEffect(() => {
-    (async()=>{
-      const available_rooms = await new FormsApi().get("/availablerooms");
-      const booked_rooms = await new FormsApi().get("/bookedrooms");
-      if(available_rooms !== "Error" && booked_rooms !== "Error"){
-        if(available_rooms.status !== false && booked_rooms.status !== false){
-          setState({
-            ...state,
-            available_rooms: available_rooms.result,
-            booked_rooms: booked_rooms.result,
-          });
-        }
-      }
-    })();
-  }, []);
-    
+      useEffect(() => {
+        (async () => {
+          const res = await new FormsApi().get("/rooms/" + user.id);
+          if (res === "Error") {
+            console.log(res);
+          } else {
+            if (res.status) {
+              let available_rooms = [];
+              let booked_rooms = [];
+              res.result.forEach((el) => {
+                if (el.booked) {
+                  booked_rooms = [...booked_rooms, el];
+                } else {
+                  available_rooms = [...available_rooms, el];
+                }
+              });
+              setState({ ...state, available_rooms, booked_rooms });
+            }
+          }
+        })();
+      }, []);
+
     return(
         <>
         <input type="checkbox" id="nav-toggle" defaultChecked />
@@ -89,7 +96,7 @@ const handleOpenActionsRooms = (e) => {
             <div className="cards_ctr">
             <div className="single_card">
                 <div className="">
-                  <h3>40</h3>
+                  <h3>10</h3>
                   <span>
                     Total Bookings <br />
                   </span>
@@ -100,7 +107,7 @@ const handleOpenActionsRooms = (e) => {
               </div>
               <div className="single_card">
                 <div className="">
-                  <h3>10</h3>
+                  <h3>{`${state.available_rooms.length}`}</h3>
                   <span>Free Rooms</span>
                 </div>
                 <div className="">
@@ -109,7 +116,7 @@ const handleOpenActionsRooms = (e) => {
                 </div>
                 <div className="single_card">
                 <div className="">
-                  <h3>57</h3>
+                  <h3>{`${state.booked_rooms.length}`}</h3>
                   <span>Occupied Rooms</span>
                 </div>
                 <div className="">
@@ -185,18 +192,14 @@ const handleOpenActionsRooms = (e) => {
                                 <td>Number</td>
                                 <td>Room Fee(UGX)</td>
                                 <td>Room Type</td>
-                                <td>
-                                    <Button
-                                    >
-                                      Edit
-                                    </Button>
-                                  </td>
+                                <td>Edit</td>
+                                <td>Status</td>
                                 </tr>
                             </thead>
                             <tbody>
                             {state.available_rooms.length === 0 ? (
                               <tr>
-                                <td>No rooms to display</td>
+                                <td>No rooms to display...</td>
                               </tr>
                             ) : (
                               state.available_rooms.map((v, i)=>{
@@ -205,6 +208,28 @@ const handleOpenActionsRooms = (e) => {
                                     <td>{v.room_number}</td>
                                     <td>{v.room_fee}</td>
                                     <td>{v.room_type}</td>
+                                    <td>
+                                    <Button
+                                      onClick={(e) => {
+                                        setState({
+                                          ...state,
+                                          
+                                        });
+                                      }}
+                                    >
+                                      Edit
+                                    </Button>
+                                  </td>
+                                  <Button
+                                      onClick={(e) => {
+                                        setState({
+                                          ...state,
+                                          
+                                        });
+                                      }}
+                                    >
+                                      Book
+                                    </Button>
                                   </tr>
                                 )
                               })
@@ -236,9 +261,8 @@ const handleOpenActionsRooms = (e) => {
                       <tbody>
                       {state.booked_rooms.length === 0 ? (
                         <tr>
-                          <td>No rooms to display</td>
+                          <td>No rooms to display...</td>
                         </tr>
-
                       ) : (
                         state.booked_rooms.map((v, i)=>{
                           return(

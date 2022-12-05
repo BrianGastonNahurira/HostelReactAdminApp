@@ -36,7 +36,6 @@ const changeSelectHostel = (event) => {
     setState({ ...state, selected_hostel: event.target.value });
   };
 
-
   const form_submit_room = async (e) => {
     e.preventDefault();
     setState({
@@ -133,7 +132,6 @@ const changeSelectHostel = (event) => {
           {state.mui.snackBarMessage}
         </Alert>
       </Snackbar>
-
         <input type="checkbox" id="nav-toggle" defaultChecked />
         <Sidebar active = "home" />
         <div className="main_ctr">
@@ -145,6 +143,12 @@ const changeSelectHostel = (event) => {
                   className="room-ctr-fields"
                   onSubmit={form_submit_room}
                 >
+                     <input
+                      type="text"
+                      name="landlord"
+                      value={user.id}
+                      hidden
+                    />
                 <div className="room-inputs-ctr-divided">
                   <FormControl  style={{width: "48%"}}>
                     <InputLabel id="select-hostel-label">

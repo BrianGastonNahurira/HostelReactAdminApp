@@ -26,6 +26,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "^5.0.0",
+    "react-states": "^7.2.0",
     "recharts": "^2.1.6",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",

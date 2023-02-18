@@ -13,6 +13,7 @@ const Home = () => {
   //displaying rooms that are not booked.
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
+    let api = new FormsApi();
     axios
       .get(url)
       .then((res) => {

@@ -1,5 +1,5 @@
 import React from "react";
-
+import FormsApi from "../../../api/api";
 import { useNavigate } from "react-router-dom";
 import {
   TableContainer,
@@ -15,23 +15,29 @@ import { Button } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const url = "http://localhost:5051/api/v6/pendinghostel";
+import { async } from "@firebase/util";
 
 export const PendingTbl = () => {
-  const [state, setState] = useState([]);
+  const [state, setState] = useState({
+    pendinghostels: [],
+  });
   console.log(state);
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
-        console.log("wjqwh");
-        setState(res.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    (async () => {
+      const res = await new FormsApi().get("/pendinghostels");
+      if (res === "Error") {
+        console.log(res);
+      } else {
+        if (res.status) {
+          let pendinghostels = [];
+          res.result.forEach((l) => {
+            pendinghostels.push(i);
+          });
+          setState({ ...state, pendinghostels });
+        }
+      }
+    })();
   });
 
   const postDelete = (id, e) => {
@@ -40,6 +46,7 @@ export const PendingTbl = () => {
       .delete(`http://localhost:5051/api/v6/deletehostel/${id}`)
       .then((res) => alert("Hostel Deleted"))
       .catch((err) => console.log(err));
+    // new FormsApi().delete(`/deletehostel/${id}`);
   };
 
   const navigate = useNavigate();
@@ -101,7 +108,7 @@ export const PendingTbl = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {state.map((row) => (
+          {state.pendinghostels.map((row) => (
             <TableRow
               key={row.id}
               sx={{ "&:last-child td, &last-child th": { border: 0 } }}
@@ -116,7 +123,7 @@ export const PendingTbl = () => {
                   style={{ color: "green" }}
                   onClick={() => navigate("/hostel/:id", { replace: row.id })}
                 >
-                  EDIT T
+                  EDIT
                 </Button>
               </TableCell>
               <TableCell align="center">

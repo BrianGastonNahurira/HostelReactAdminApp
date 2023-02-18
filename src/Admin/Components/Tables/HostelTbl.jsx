@@ -16,22 +16,38 @@ import {
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const url = "http://localhost:5055/api/v6/confirmedhostel";
+import FormsApi from "../../../api/api";
 
 export const HostelTable = () => {
-  const [state, setState] = useState([]);
+  const [state, setState] = useState({
+    confirmedhostel: [],
+  });
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
+    // axios
+    //   .get(url)
+    //   .then((res) => {
+    //     console.log(res);
+    //     setState(res.data.result);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    (async () => {
+      const res = await new FormsApi().get("/confirmedhostel");
+      if (res === "Error") {
         console.log(res);
-        setState(res.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      } else {
+        if (res.status) {
+          let confirmedhostel = [];
+          res.result.forEach((i) => {
+            confirmedhostel.push(i);
+          });
+          setState({ ...state, confirmedhostel });
+        }
+      }
+    })();
   });
 
   return (
@@ -70,7 +86,7 @@ export const HostelTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {state.map((i) => (
+          {state.confirmedhostel.map((i) => (
             <TableRow
               key={i.id}
               sx={{ "&:last-child td, &last-child th": { border: 0 } }}

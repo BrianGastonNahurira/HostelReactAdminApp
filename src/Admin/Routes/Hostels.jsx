@@ -7,21 +7,7 @@ import { HostelTable } from "../Components/Tables/HostelTbl";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-// const url = "http://localhost:5051/api/v6/pendinghostel";
 export default () => {
-  // const [state, setState] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(url)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // });
-
   return (
     <>
       <input type="checkbox" id="nav-toggle" defaultChecked />

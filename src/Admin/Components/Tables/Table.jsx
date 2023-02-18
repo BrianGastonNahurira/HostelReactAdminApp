@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import FormsApi from "../../../api/api";
 import {
   TableContainer,
   Table,
@@ -9,22 +10,29 @@ import {
   TableCell,
   Paper,
 } from "@mui/material";
+import { async } from "@firebase/util";
 // import "../Statemets/statements.css";
 
-const url = "http://localhost:5055/api/v6/allbookings";
 export const StateTable = () => {
-  const [state, setState] = useState([]);
-  // console.log(state);
+  const [state, setState] = useState({
+    allbookings: [],
+  });
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
-        setState(res.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    (async () => {
+      const res = await new FormsApi().get("/allbookings");
+      if (res === "Error") {
+        console.log(res);
+      } else {
+        if (res.status) {
+          let allbookings = [];
+          res.result.forEach((l) => {
+            allbookings.push(l);
+          });
+          setState({ ...state, allbookings });
+        }
+      }
+    })();
   });
 
   return (
@@ -74,7 +82,7 @@ export const StateTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {state.map((row) => (
+          {state.allbookings.map((row) => (
             <TableRow
               key={row.id}
               sx={{ "&:last-child td, &last-child th": { border: 0 } }}

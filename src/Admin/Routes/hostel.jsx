@@ -39,7 +39,7 @@ const ConfirmHostel = ()=>{
     })
     useEffect(()=>{
         (async () => {
-            let res = await new FormsApi().get(`/onehostel/${params.id}`);
+            let res = await new FormsApi().get(`/hostel/${params.id}`);
             if (res !== "Error") {
               if (res.status !== false) {
                 setState({

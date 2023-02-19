@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {Alert as MuiAlert,
-  Slide, Button, FormControl, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
+import {
+  Alert as MuiAlert,
+  Slide,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Snackbar,
+  TextField,
+} from "@mui/material";
 import { UploadSingle } from "../../api/files";
 import ".//designs/room.css";
 import Sidebar from "../Components/sidebar/Sidebar";
@@ -8,14 +17,13 @@ import Header from "../Components/Topbar/Header";
 import user from "../../app.config";
 import FormsApi from "../../api/api";
 
-export default ()=>{
+export default () => {
   const [state, setState] = useState({
     rooms: [],
     hostels: [],
     selected_hostel: "",
     active_room: "",
     mui: { snackBarPosition: { vertical: "top", horizontal: "right" } },
-
   });
 
   useEffect(() => {
@@ -32,7 +40,7 @@ export default ()=>{
     })();
   }, []);
 
-const changeSelectHostel = (event) => {
+  const changeSelectHostel = (event) => {
     setState({ ...state, selected_hostel: event.target.value });
   };
 
@@ -68,8 +76,7 @@ const changeSelectHostel = (event) => {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-    }else
-    if (res.status === false) {
+    } else if (res.status === false) {
       setState({
         ...state,
         mui: {
@@ -82,7 +89,7 @@ const changeSelectHostel = (event) => {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-    }else {
+    } else {
       setState({
         ...state,
         mui: {
@@ -96,27 +103,27 @@ const changeSelectHostel = (event) => {
         window.location.reload();
       }, 2000);
     }
-  }
+  };
 
-    //close snackBar
-    const handleClose = (event, reason) => {
-      if (reason === "clickaway") {
-        return;
-      }
-      setState({
-        ...state,
-        mui: { ...state.mui, snackBarMessage: "", snackBarOpen: false },
-      });
-    };
-
-    //alert for material ui
-    const Alert = React.forwardRef(function Alert(props, ref) {
-      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  //close snackBar
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setState({
+      ...state,
+      mui: { ...state.mui, snackBarMessage: "", snackBarOpen: false },
     });
+  };
 
-    return(
-        <>
-         <Snackbar
+  //alert for material ui
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  return (
+    <>
+      <Snackbar
         open={state.mui.snackBarOpen}
         anchorOrigin={state.mui.snackBarPosition}
         autoHideDuration={4500}
@@ -132,96 +139,88 @@ const changeSelectHostel = (event) => {
           {state.mui.snackBarMessage}
         </Alert>
       </Snackbar>
-        <input type="checkbox" id="nav-toggle" defaultChecked />
-        <Sidebar active = "home" />
-        <div className="main_ctr">
-        <Header /> 
+      <input type="checkbox" id="nav-toggle" defaultChecked />
+      <Sidebar active="home" />
+      <div className="main_ctr">
+        <Header />
         <main>
-           <div className="manage-comp-ctr">
-              <div style={{ marginBlock: 10 }}>New Room</div>
-                <form
-                  className="room-ctr-fields"
-                  onSubmit={form_submit_room}
-                >
-                     <input
-                      type="text"
-                      name="landlord"
-                      value={user.id}
-                      hidden
-                    />
-                <div className="room-inputs-ctr-divided">
-                  <FormControl  style={{width: "48%"}}>
-                    <InputLabel id="select-hostel-label">
-                      Select Hostel
-                      </InputLabel>
-                      <Select
-                        labelId="select-hostel-label"
-                        value={state.selected_hostel}
-                        label="Select Hostel"
-                        onChange={changeSelectHostel}
-                        name="hostel_id"
-                        required
-                      >
-                        {state.hostels.length === 0 ? (
-                          <MenuItem value="">No Hostels</MenuItem>
-                        ) : (
-                          state.hostels.map((v, i) => (
-                            <MenuItem key={i} value={v.id}>
-                              {v.hostel_name}
-                            </MenuItem>
-                          ))
-                        )}
-                      </Select>
-                    </FormControl>
-                    <FormControl style={{width: "48%"}}>
-                      <InputLabel id="select-room-type-label">
-                        Select Room Type
-                      </InputLabel>
-                      <Select
-                        labelId="select-room-type-label"
-                        label="Select Room Type"
-                        name="room_type"
-                        required
-                      >
-                          <MenuItem value="Single">Single</MenuItem>
-                            <MenuItem value="Double">Double</MenuItem>
-                      </Select>
-                    </FormControl>
-                    </div>
-                    <div className="register-inputs-ctr-half-width">
-                  <TextField
-                    label="Room Description"
-                    name="room_description"
-                    variant="outlined"
-                    color="primary"
-                    style={{ width: "100%", margin: "10px 0px" }}
-                 />
-                  </div>
-                    <div className="room-inputs-ctr-divided">
-                     <TextField
-                      label="Room Number"
-                      name="room_number"
-                      variant="outlined"
-                      color="primary"
-                      style={{ width: "48%" }}
-                    />
-                  <TextField
-                      label="Room Fee(UGX)"
-                      name="room_fee"
-                      variant="outlined"
-                      color="primary"
-                      style={{ width: "48%" }}
-                    />
-            </div>
+          <div className="manage-comp-ctr">
+            <div style={{ marginBlock: 10 }}>New Room</div>
+            <form className="room-ctr-fields" onSubmit={form_submit_room}>
+              <input type="text" name="landlord" value={user.id} hidden />
+              <div className="room-inputs-ctr-divided">
+                <FormControl style={{ width: "48%" }}>
+                  <InputLabel id="select-hostel-label">
+                    Select Hostel
+                  </InputLabel>
+                  <Select
+                    labelId="select-hostel-label"
+                    value={state.selected_hostel}
+                    label="Select Hostel"
+                    onChange={changeSelectHostel}
+                    name="hostel_id"
+                    required
+                  >
+                    {state.hostels.length === 0 ? (
+                      <MenuItem value="">No Hostels</MenuItem>
+                    ) : (
+                      state.hostels.map((v, i) => (
+                        <MenuItem key={i} value={v.id}>
+                          {v.hostel_name}
+                        </MenuItem>
+                      ))
+                    )}
+                  </Select>
+                </FormControl>
+                <FormControl style={{ width: "48%" }}>
+                  <InputLabel id="select-room-type-label">
+                    Select Room Type
+                  </InputLabel>
+                  <Select
+                    labelId="select-room-type-label"
+                    label="Select Room Type"
+                    name="room_type"
+                    required
+                  >
+                    <MenuItem value="Single">Single</MenuItem>
+                    <MenuItem value="Double">Double</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <div className="register-inputs-ctr-half-width">
+                <TextField
+                  label="Room Description"
+                  name="room_description"
+                  variant="outlined"
+                  color="primary"
+                  style={{ width: "100%", margin: "10px 0px" }}
+                />
+              </div>
+              <div className="room-inputs-ctr-divided">
+                <TextField
+                  label="Room Number"
+                  name="room_number"
+                  variant="outlined"
+                  color="primary"
+                  style={{ width: "48%" }}
+                />
+                <TextField
+                  label="Room Fee(UGX)"
+                  name="room_fee"
+                  variant="outlined"
+                  color="primary"
+                  style={{ width: "48%" }}
+                />
+              </div>
               <div>
                 <Button variant="outlined" color="primary" type="submit">
-                Submit
+                  Submit
                 </Button>
-                </div>
-              </form>
-            </div>
-          </main>
-        </div>
-        </>
-    );
-}
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    </>
+  );
+};

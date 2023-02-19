@@ -17,7 +17,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const url = "http://localhost:5051/api/v6/confirmedhostel";
+const url = "http://localhost:5055/api/v6/confirmedhostel";
 
 export const HostelTable = () => {
   const [state, setState] = useState([]);
@@ -91,77 +91,3 @@ export const HostelTable = () => {
     </TableContainer>
   );
 };
-const tableData = [
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-];

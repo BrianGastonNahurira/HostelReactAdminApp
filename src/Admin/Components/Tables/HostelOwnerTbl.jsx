@@ -17,8 +17,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const url = "http://localhost:5051/api/v6/allOwners";
-
+const url = "http://localhost:5055/api/v6/allowners";
 export const HostelOwnerTbl = () => {
   const [state, setState] = useState([]);
 
@@ -35,7 +34,7 @@ export const HostelOwnerTbl = () => {
   });
 
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: "500px" }}>
+    <TableContainer component={Paper} sx={{ maxHeight: "450px" }}>
       <Table aria-aria-label="simple table" stickyHeader>
         <TableHead>
           <TableRow></TableRow>
@@ -79,7 +78,7 @@ export const HostelOwnerTbl = () => {
             >
               <TableCell>{row.name}</TableCell>
               <TableCell align="right"> {row.hostel} </TableCell>
-              <TableCell align="right">{row.phone_number}</TableCell>
+              <TableCell align="right">0{row.phone_number}</TableCell>
             </TableRow>
           ))}
         </TableBody>

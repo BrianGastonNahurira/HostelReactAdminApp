@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   TableContainer,
   Table,
@@ -10,7 +11,22 @@ import {
 } from "@mui/material";
 // import "../Statemets/statements.css";
 
+const url = "http://localhost:5055/api/v6/allbookings";
 export const StateTable = () => {
+  const [state, setState] = useState([]);
+  // console.log(state);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => {
+        setState(res.data.result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "437px" }}>
       <Table aria-aria-label="simple table" stickyHeader>
@@ -43,7 +59,7 @@ export const StateTable = () => {
                 fontSize: "1rem",
               }}
             >
-              BookingFee(Ugshs)
+              Room Number
             </TableCell>
             <TableCell
               style={{
@@ -53,20 +69,20 @@ export const StateTable = () => {
               }}
               align="center"
             >
-              Telphone No
+              Level
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row) => (
+          {state.map((row) => (
             <TableRow
-              key={row.Name}
+              key={row.id}
               sx={{ "&:last-child td, &last-child th": { border: 0 } }}
             >
-              <TableCell>{row.Name}</TableCell>
-              <TableCell>{row.Hostel}</TableCell>
-              <TableCell align="center">{row.BookingFee}</TableCell>
-              <TableCell align="center">{row.Tel}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.name_of_hostel}</TableCell>
+              <TableCell align="center">{row.room_number}</TableCell>
+              <TableCell align="center">{row.level}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -74,77 +90,3 @@ export const StateTable = () => {
     </TableContainer>
   );
 };
-const tableData = [
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "20000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "15000",
-    Tel: "0778089708",
-  },
-  {
-    Name: "Nahurira Gaston",
-    Hostel: "Northern Elite",
-    BookingFee: "1000",
-    Tel: "0787277525",
-  },
-  {
-    Name: "Aggi Peter",
-    Hostel: "Mandera",
-    BookingFee: "10000",
-    Tel: "0778089708",
-  },
-];

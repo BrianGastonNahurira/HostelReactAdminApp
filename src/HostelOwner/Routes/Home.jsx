@@ -66,7 +66,7 @@ const handleOpenActionsRooms = (e) => {
 
       useEffect(() => {
         (async () => {
-          const res = await new FormsApi().get("/rooms/" + user.id);
+          const res = await new FormsApi().get("/allrooms/" + user.id);
           if (res === "Error") {
             console.log(res);
           } else {

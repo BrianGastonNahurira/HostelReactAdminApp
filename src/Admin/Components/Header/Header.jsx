@@ -46,8 +46,8 @@ const Header = () => {
         >
           <img src={Avatar} alt="" width="40px" height="40px" />
           <div className="">
-            <h4>{user ? `${user.name.split(" ")[0]}` : "Username"}</h4>
-            <small>{user.user.role}</small>
+            {/* <h4>{user ? `${user.name.split(" ")[0]}` : "Username"}</h4> */}
+            <small>admin</small>
           </div>
         </div>
       </div>

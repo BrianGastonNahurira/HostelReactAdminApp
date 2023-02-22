@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "../../Admin/Design/AddHostel.css";
 import { Button, Snackbar, TextField } from "@mui/material";
 import FileUpload from "../../api/files";
@@ -9,12 +9,11 @@ import Sidebar from "../Components/sidebar/Sidebar";
 import Header from "../Components/Topbar/Header";
 import FormsApi from "../../api/api";
 
-
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const AddHostel=() => {
+const AddHostel = () => {
   const [state, setState] = useState({
     step: 1,
     fieldsError: false,
@@ -48,15 +47,14 @@ const AddHostel=() => {
       },
     });
 
-
     let fd = new FormData(e.target);
     let form_contents = {};
     fd.forEach((value, name) => {
-    form_contents[name] = value;
+      form_contents[name] = value;
     });
     let api = new FormsApi();
     let res = await api.post("/newhostel", form_contents);
-    if(res.data ==="Hostel Exists"){
+    if (res.data === "Hostel Exists") {
       setState({
         ...state,
         mui: {
@@ -66,7 +64,7 @@ const AddHostel=() => {
           snackBarOpen: true,
         },
       });
-    }else if(res.status === false){
+    } else if (res.status === false) {
       setState({
         ...state,
         mui: {
@@ -76,7 +74,7 @@ const AddHostel=() => {
           snackBarOpen: true,
         },
       });
-    }else{
+    } else {
       setState({
         ...state,
         step: 2,
@@ -89,21 +87,21 @@ const AddHostel=() => {
         },
       });
     }
-}
-const handleClose = (event, reason) => {
-  if (reason === "clickaway") {
-    return;
-  }
-  setState({
-    ...state,
-    mui: {
-      ...state.mui,
-      snackBarMessage: "",
-      snackBarOpen: false,
-      snackBarStatus: "info",
-    },
-  });
-};
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setState({
+      ...state,
+      mui: {
+        ...state.mui,
+        snackBarMessage: "",
+        snackBarOpen: false,
+        snackBarStatus: "info",
+      },
+    });
+  };
   return (
     <>
       <Snackbar
@@ -176,7 +174,7 @@ const handleClose = (event, reason) => {
                         variant="outlined"
                         color="primary"
                         label="Hostel Name"
-                        name="hostel_name"    
+                        name="hostel_name"
                         style={{ width: "45%" }}
                         error={state.fieldsError}
                         helperText={
@@ -207,7 +205,7 @@ const handleClose = (event, reason) => {
                         variant="outlined"
                         color="primary"
                         label="Hostel Description"
-                        name="hostel_description"    
+                        name="hostel_description"
                         style={{ width: "100%" }}
                       />
                     </div>
@@ -233,7 +231,7 @@ const handleClose = (event, reason) => {
                         color="primary"
                         label="Amount For Double Room"
                         name="double_room_amount"
-                            style={{ width: "45%" }}
+                        style={{ width: "45%" }}
                       />
                     </div>
                     <div className="inputs_ctr_fullwidth">
@@ -242,7 +240,7 @@ const handleClose = (event, reason) => {
                         variant="outlined"
                         color="primary"
                         label="Telephone Number"
-                        name="telphone_number"    
+                        name="telphone_number"
                         style={{ width: "100%" }}
                       />
                     </div>
@@ -251,7 +249,7 @@ const handleClose = (event, reason) => {
                         required
                         variant="outlined"
                         label="Single Rooms Available"
-                        name="single_rooms_available"    
+                        name="single_rooms_available"
                         color="primary"
                         style={{ width: "45%" }}
                         error={state.fieldsError}
@@ -266,7 +264,7 @@ const handleClose = (event, reason) => {
                         variant="outlined"
                         color="primary"
                         label="Double Rooms Available"
-                        name="double_rooms_available"    
+                        name="double_rooms_available"
                         type="number"
                         style={{ width: "45%" }}
                         error={state.fieldsError}
@@ -287,7 +285,7 @@ const handleClose = (event, reason) => {
                         multiline
                         style={{ width: "45%" }}
                       />
-                         <TextField
+                      <TextField
                         required
                         variant="outlined"
                         color="primary"
@@ -318,7 +316,7 @@ const handleClose = (event, reason) => {
                       : {}
                   }
                 >
-                  <FileUpload hostel={state.hostel_id} confirming={false}/>
+                  <FileUpload hostel={state.hostel_id} confirming={false} />
                 </div>
               </div>
             </div>

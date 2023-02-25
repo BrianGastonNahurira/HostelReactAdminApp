@@ -134,6 +134,13 @@ const AddHostel = () => {
               <div>
                 <h2>New Hostel</h2>
               </div>
+              <div>
+            <Link to="/">
+              <Button variant="contained" color="primary">
+                Back
+              </Button>
+            </Link>
+          </div>
             </div>
             <div className="progress_bar_new_product">
               <div

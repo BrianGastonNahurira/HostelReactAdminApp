@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../Admin/Design/Home.css";
 import "..//Design/pending.css";
@@ -9,11 +9,11 @@ import SideBar from "../Components/SideBar/SideBar";
 
 export default () => {
   const [state, setState] = useState({
-   pending_hostels: [],
-   all_hostels: [],
-   });
+    pending_hostels: [],
+    all_hostels: [],
+  });
 
-   useEffect(() => {
+  useEffect(() => {
     (async () => {
       const res = await new FormsApi().get("/allhostels");
       if (res === "Error") {
@@ -43,7 +43,7 @@ export default () => {
         <Header />
         <main>
           <div className="card">
-          <div className="pdts-header-btns">
+            <div className="pdts-header-btns">
               <div>
                 <h2>Beacon Hostels</h2>
               </div>
@@ -61,7 +61,7 @@ export default () => {
             </div>
             <div className="hostels-grid-ctr trending">
               <div>
-              <span>
+                <span>
                   Pending Hostels
                   {`(${state.pending_hostels.length})`}
                 </span>
@@ -85,19 +85,19 @@ export default () => {
                         return (
                           <tr key={i}>
                             <td>{v.hostel_name}</td>
-                            <td>{v.hostel_owner}</td>
+                            <td>{v.hostel_landlord}</td>
                             <td>{v.booking_fee}</td>
                             <td>
-                            {v.hostel_images ? (
-                                      <img
-                                        src={v.hostel_images}
-                                        height={75}
-                                        width={75}
-                                        style={{ borderRadius: 5 }}
-                                      />
-                                    ) : (
-                                      "..."
-                                    )}
+                              {v.hostel_images ? (
+                                <img
+                                  src={JSON.parse(v.hostel_images)[0]}
+                                  height={75}
+                                  width={75}
+                                  style={{ borderRadius: 5 }}
+                                />
+                              ) : (
+                                "..."
+                              )}
                             </td>
                             <td>
                               <Link to={`/onehostel/${v.id}`}>

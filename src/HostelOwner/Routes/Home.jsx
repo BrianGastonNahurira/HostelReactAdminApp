@@ -8,25 +8,24 @@ import FormsApi from "../../api/api";
 import user from "../../app.config";
 import axios from "axios";
 
-const url = "http://localhost:5055/api/v6/allrooms";
+// const url = "http://localhost:5055/api/v6/allrooms";
 const Home = () => {
   //displaying rooms that are not booked.
-  const [rooms, setRooms] = useState([]);
-  useEffect(() => {
-    let api = new FormsApi();
-    axios
-      .get(url)
-      .then((res) => {
-        setRooms(res.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-  const myrooms = rooms.filter((r) => {
-    return r.hostel_landlord === user.id;
-  });
-  console.log(myrooms);
+  // const [rooms, setRooms] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .get(url)
+  //     .then((res) => {
+  //       setRooms(res.data.result);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // });
+  // const myrooms = rooms.filter((r) => {
+  //   return r.hostel_landlord === user.id;
+  // });
+  // console.log(myrooms);
 
   const [state, setState] = useState({
     booked_rooms: [],
@@ -241,7 +240,7 @@ const Home = () => {
                                   });
                                 }}
                               >
-                                Book
+                              Free
                               </Button>
                             </tr>
                           );
@@ -264,9 +263,7 @@ const Home = () => {
                         <td>Number</td>
                         <td>Room Fee(UGX)</td>
                         <td>Room type</td>
-                        <td>
-                          <Button>Remove</Button>
-                        </td>
+                        <td>Actions</td>
                       </tr>
                     </thead>
                     <tbody>
@@ -281,6 +278,22 @@ const Home = () => {
                               <td>{v.room_number}</td>
                               <td>{v.room_fee}</td>
                               <td>{v.room_type}</td>
+                              <td>
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  onClick={() => {
+                                    let arr = this.state.formData;
+                                    arr.splice(i, 1);
+                                    this.setState({
+                                      ...this.state,
+                                      formData: arr,
+                                    });
+                                  }}
+                                >
+                                  Remove
+                                </Button>
+                              </td>
                             </tr>
                           );
                         })

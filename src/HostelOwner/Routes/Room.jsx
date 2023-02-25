@@ -16,6 +16,7 @@ import Sidebar from "../Components/sidebar/Sidebar";
 import Header from "../Components/Topbar/Header";
 import user from "../../app.config";
 import FormsApi from "../../api/api";
+import { Link } from "react-router-dom";
 
 export default () => {
   const [state, setState] = useState({
@@ -144,6 +145,13 @@ export default () => {
       <div className="main_ctr">
         <Header />
         <main>
+        <div className="__backhme">
+            <Link to="/">
+              <Button variant="contained" color="primary">
+                Back
+              </Button>
+            </Link>
+          </div>
           <div className="manage-comp-ctr">
             <div style={{ marginBlock: 10 }}>New Room</div>
             <form className="room-ctr-fields" onSubmit={form_submit_room}>

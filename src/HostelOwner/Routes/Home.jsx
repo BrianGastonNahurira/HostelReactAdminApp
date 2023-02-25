@@ -79,12 +79,11 @@ const Home = () => {
   const handleOpenActionsRooms = (e) => {
     setState({ ...state, AnchorElRooms: e.currentTarget });
   };
-
   useEffect(() => {
     (async () => {
       const res = await new FormsApi().get("/rooms/" + user.id);
       if (res === "Error") {
-        // console.log(res);
+        console.log(res);
       } else {
         if (res.status) {
           let available_rooms = [];
@@ -101,7 +100,7 @@ const Home = () => {
       }
     })();
   }, []);
-
+// console.log(state.booked_rooms);
   return (
     <>
       <input type="checkbox" id="nav-toggle" defaultChecked />
@@ -206,6 +205,7 @@ const Home = () => {
                         <td>Number</td>
                         <td>Room Fee(UGX)</td>
                         <td>Room Type</td>
+                        <td>Hostel</td>
                         <td>Edit</td>
                         <td>Status</td>
                       </tr>
@@ -222,6 +222,8 @@ const Home = () => {
                               <td>{v.room_number}</td>
                               <td>{v.room_fee}</td>
                               <td>{v.room_type}</td>
+                              <td>{v.hostel_name}</td>
+
                               <td>
                                 <Button
                                   onClick={(e) => {
@@ -233,6 +235,7 @@ const Home = () => {
                                   Edit
                                 </Button>
                               </td>
+                              <td>
                               <Button
                                 onClick={(e) => {
                                   setState({
@@ -242,6 +245,7 @@ const Home = () => {
                               >
                               Free
                               </Button>
+                              </td>
                             </tr>
                           );
                         })
@@ -263,6 +267,7 @@ const Home = () => {
                         <td>Number</td>
                         <td>Room Fee(UGX)</td>
                         <td>Room type</td>
+                        <td>Hostel</td>
                         <td>Actions</td>
                       </tr>
                     </thead>
@@ -278,6 +283,7 @@ const Home = () => {
                               <td>{v.room_number}</td>
                               <td>{v.room_fee}</td>
                               <td>{v.room_type}</td>
+                              <td>{v.hostel_name}</td>
                               <td>
                                 <Button
                                   variant="contained"

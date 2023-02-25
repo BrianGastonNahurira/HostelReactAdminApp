@@ -18,6 +18,11 @@ import user from "../../app.config";
 import FormsApi from "../../api/api";
 import { Link } from "react-router-dom";
 
+  //alert for material ui
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
 export default () => {
   const [state, setState] = useState({
     rooms: [],
@@ -40,6 +45,7 @@ export default () => {
       }
     })();
   }, []);
+
 
   const changeSelectHostel = (event) => {
     setState({ ...state, selected_hostel: event.target.value });
@@ -117,10 +123,12 @@ export default () => {
     });
   };
 
-  //alert for material ui
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+const hostel_n = state.hostels.filter((l)=>{
+  return state.selected_hostel === l.id;
   });
+ const p = hostel_n.map((v, r)=>{
+  return v.hostel_name;
+})
 
   return (
     <>
@@ -155,7 +163,14 @@ export default () => {
           <div className="manage-comp-ctr">
             <div style={{ marginBlock: 10 }}>New Room</div>
             <form className="room-ctr-fields" onSubmit={form_submit_room}>
-              <input type="text" name="landlord" value={user.id} hidden />
+              <input type="text" name="landlord_id" value={user.id} hidden />
+              <input
+                type="text"
+                name="hostel_name"
+                value={p}
+                hidden
+                onChange={() => {}}
+                    />
               <div className="room-inputs-ctr-divided">
                 <FormControl style={{ width: "48%" }}>
                   <InputLabel id="select-hostel-label">

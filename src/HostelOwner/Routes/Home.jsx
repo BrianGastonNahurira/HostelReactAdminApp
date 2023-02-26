@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Button, Menu, MenuItem, TextField } from "@mui/material";
+import { Button,  Alert as MuiAlert,
+  Slide,
+   Menu, MenuItem, Snackbar, TextField, Dialog, DialogTitle, DialogContentText, DialogContent, DialogActions } from "@mui/material";
 import { Link } from "react-router-dom";
 import Sidebar from "../Components/sidebar/Sidebar";
 import Header from "../Components/Topbar/Header";
 import "./designs/home.css";
 import FormsApi from "../../api/api";
 import user from "../../app.config";
-import axios from "axios";
+  //alert for material ui
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
-// const url = "http://localhost:5055/api/v6/allrooms";
 const Home = () => {
-  //displaying rooms that are not booked.
-  // const [rooms, setRooms] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get(url)
-  //     .then((res) => {
-  //       setRooms(res.data.result);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // });
-  // const myrooms = rooms.filter((r) => {
-  //   return r.hostel_landlord === user.id;
-  // });
-  // console.log(myrooms);
-
   const [state, setState] = useState({
     booked_rooms: [],
     available_rooms: [],
@@ -100,9 +87,136 @@ const Home = () => {
       }
     })();
   }, []);
-// console.log(state.booked_rooms);
+//change room status from true to false
+  const changesStatustoFalse = async (id, e) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      mui: {
+        ...state.mui,
+        snackBarMessage: "Please Wait....",
+        snackBarStatus: "info",
+        snackBarOpen: true,
+      },
+    });
+    let res = await new FormsApi().put(`/room/false/${id}`);
+    if (res !== "Error") {
+      if (res.status !== false) {
+        setState({
+          ...state,
+          mui: {
+            ...state.mui,
+            snackBarMessage: "Room Status Successfully....",
+            snackBarStatus: "success",
+            snackBarOpen: true,
+          },
+        });
+          window.location.reload();
+      } else {
+        setState({
+          ...state,
+          mui: {
+            ...state.mui,
+            snackBarMessage: "Change Status Failed, Server Error....",
+            snackBarStatus: "warning",
+            snackBarOpen: true,
+          },
+        });
+      }
+      
+    } else {
+      setState({
+        ...state,
+        mui: {
+          ...state.mui,
+          snackBarMessage:
+            "Change Status Failed, Check your internet....",
+          snackBarStatus: "warning",
+          snackBarOpen: true,
+        },
+      });
+    }
+}
+
+//change room status from false to true
+const changesStatustoTrue = async (id, e) => {
+  e.preventDefault();
+  setState({
+    ...state,
+    mui: {
+      ...state.mui,
+      snackBarMessage: "Please Wait....",
+      snackBarStatus: "info",
+      snackBarOpen: true,
+    },
+  });
+  let res = await new FormsApi().put(`/room/true/${id}`);
+  if (res !== "Error") {
+    if (res.status !== false) {
+      setState({
+        ...state,
+        mui: {
+          ...state.mui,
+          snackBarMessage: "Room Status Successfully....",
+          snackBarStatus: "success",
+          snackBarOpen: true,
+        },
+      });
+        window.location.reload();
+    } else {
+      setState({
+        ...state,
+        mui: {
+          ...state.mui,
+          snackBarMessage: "Change Status Failed, Server Error....",
+          snackBarStatus: "warning",
+          snackBarOpen: true,
+        },
+      });
+    }
+    
+  } else {
+    setState({
+      ...state,
+      mui: {
+        ...state.mui,
+        snackBarMessage:
+          "Change Status Failed, Check your internet....",
+        snackBarStatus: "warning",
+        snackBarOpen: true,
+      },
+    });
+  }
+}
+
+  //close snackBar
+  const handleClose1 = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setState({
+      ...state,
+      mui: { ...state.mui, snackBarMessage: "", snackBarOpen: false },
+    });
+  };
   return (
     <>
+       <Snackbar
+        open={state.mui.snackBarOpen}
+        anchorOrigin={state.mui.snackBarPosition}
+        autoHideDuration={4500}
+        onClose={handleClose1}
+        message={state.mui.snackBarMessage}
+        TransitionComponent={(props) => <Slide {...props} direction="down" />}
+      >
+        <Alert
+          onClose={handleClose1}
+          severity={state.mui.snackBarStatus}
+          sx={{ width: "100%" }}
+        >
+          {state.mui.snackBarMessage}
+        </Alert>
+      </Snackbar>
       <input type="checkbox" id="nav-toggle" defaultChecked />
       <Sidebar active="home" />
       <div className="main_ctr">
@@ -218,30 +332,27 @@ const Home = () => {
                       ) : (
                         state.available_rooms.map((v, i) => {
                           return (
+                            
                             <tr key={i}>
                               <td>{v.room_number}</td>
                               <td>{v.room_fee}</td>
                               <td>{v.room_type}</td>
                               <td>{v.hostel_name}</td>
-
                               <td>
+                              {/* <Link to={`${v.id}`}> */}
                                 <Button
-                                  onClick={(e) => {
-                                    setState({
-                                      ...state,
-                                    });
+                                  onClick={() => {
+                                  setState({ ...state, dialog: true });
                                   }}
                                 >
                                   Edit
                                 </Button>
+                                {/* </Link> */}
                               </td>
                               <td>
                               <Button
-                                onClick={(e) => {
-                                  setState({
-                                    ...state,
-                                  });
-                                }}
+                               onClick={(ell) =>changesStatustoTrue(v.id, ell)
+                               }
                               >
                               Free
                               </Button>
@@ -288,14 +399,8 @@ const Home = () => {
                                 <Button
                                   variant="contained"
                                   color="primary"
-                                  onClick={() => {
-                                    let arr = this.state.formData;
-                                    arr.splice(i, 1);
-                                    this.setState({
-                                      ...this.state,
-                                      formData: arr,
-                                    });
-                                  }}
+                                  onClick={(ell) =>changesStatustoFalse(v.id, ell)
+                                  }
                                 >
                                   Remove
                                 </Button>
@@ -312,6 +417,64 @@ const Home = () => {
           </div>
         </main>
       </div>
+
+      <Dialog
+          open={state.dialog}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit Room</DialogTitle>
+          <form autoComplete="off" onSubmit={""}>
+            <DialogContent>
+              <DialogContentText>
+                <TextField
+                  name="room_description"
+                  variant="filled"
+                  label="Room Description"
+                  style={{
+                  width: "85%",
+                  margin: "20px",
+                  }}
+                />
+                <TextField
+                  name="room_number"
+                  variant="filled"
+                  label="Room Number"
+                  style={{
+                  width: "85%",
+                  margin: "20px",
+                  }}
+                />
+                  <TextField
+                  name="room_fee"
+                  variant="filled"
+                  label="Room Fee (UGX)"
+                  style={{
+                  width: "85%",
+                  margin: "20px",
+                  }}
+                />
+                <TextField
+                  name="room_type"
+                  variant="filled"
+                  label="Room Type"
+                  style={{
+                  width: "85%",
+                  margin: "20px",
+                  }}
+                />
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button type="submit" color="primary">
+                Save
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
     </>
   );
 };

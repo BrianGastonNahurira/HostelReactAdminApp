@@ -66,7 +66,7 @@ const EditHostel = ()=>{
           };
     }, []);
 
-  const submitHostel = async (e) => {
+  const editHostel = async (e) => {
     e.preventDefault();
     setState({
       ...state,
@@ -82,7 +82,6 @@ const EditHostel = ()=>{
     formDataInstance.forEach((el, i) => {
     form_contents[i] = el;
     });
-    form_contents["confirmed"] = true;
     let res = await new FormsApi().put(`/edit/${params.id}`,form_contents);
     if (res !== "Error") {
       if (res.status !== false) {
@@ -90,7 +89,7 @@ const EditHostel = ()=>{
           ...state,
           mui: {
             ...state.mui,
-            snackBarMessage: "Hostel Confirmed....",
+            snackBarMessage: "Hostel edited Successfully....",
             snackBarStatus: "success",
             snackBarOpen: true,
           },
@@ -103,7 +102,7 @@ const EditHostel = ()=>{
           ...state,
           mui: {
             ...state.mui,
-            snackBarMessage: "Hostel Confirmation Failed, Server Error....",
+            snackBarMessage: "Hostel editting Failed, Server Error....",
             snackBarStatus: "warning",
             snackBarOpen: true,
           },
@@ -116,7 +115,7 @@ const EditHostel = ()=>{
         mui: {
           ...state.mui,
           snackBarMessage:
-            "Hostel Confirmation Failed, Check your internet....",
+            "Hostel editting Failed, Check your internet....",
           snackBarStatus: "warning",
           snackBarOpen: true,
         },
@@ -174,7 +173,7 @@ const EditHostel = ()=>{
               </div>
             </div>
         <div className="pdts-form-ctr">
-        <form onSubmit={submitHostel} className="new_product_form">
+        <form onSubmit={editHostel} className="new_product_form">
         <div className="inputs_ctr">
                   <div style={{ marginBlock: 10, fontWeight: "bold" }}>
                     Hostel Info
@@ -457,4 +456,4 @@ const EditHostel = ()=>{
     );
 }
 
-export default ConfirmHostel;
+export default EditHostel;

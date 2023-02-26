@@ -147,15 +147,15 @@ export const HostelTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {state.confirmedhostel.map((i) => (
+            {state.confirmedhostel.map((v, i) => (
               <TableRow
-                key={i.id}
+                key={i}
                 sx={{ "&:last-child td, &last-child th": { border: 0 } }}
               >
-                <TableCell>{i.hostel_name}</TableCell>
+                <TableCell>{v.hostel_name}</TableCell>
                 <TableCell>
-                  <Link href="/addhostel">
-                    <EditIcon />
+                  <Link to ={`addhostel/${v.id}`}>
+                  <Button>Edit</Button>
                   </Link>
                 </TableCell>
                 <TableCell align="left">

@@ -332,22 +332,19 @@ const changesStatustoTrue = async (id, e) => {
                       ) : (
                         state.available_rooms.map((v, i) => {
                           return (
-                            
                             <tr key={i}>
+                              
                               <td>{v.room_number}</td>
                               <td>{v.room_fee}</td>
                               <td>{v.room_type}</td>
                               <td>{v.hostel_name}</td>
                               <td>
-                              {/* <Link to={`${v.id}`}> */}
+                              <Link to={`/editroom/${v.id}`}> 
                                 <Button
-                                  onClick={() => {
-                                  setState({ ...state, dialog: true });
-                                  }}
                                 >
                                   Edit
                                 </Button>
-                                {/* </Link> */}
+                                </Link>
                               </td>
                               <td>
                               <Button
@@ -417,64 +414,6 @@ const changesStatustoTrue = async (id, e) => {
           </div>
         </main>
       </div>
-
-      <Dialog
-          open={state.dialog}
-          onClose={handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Edit Room</DialogTitle>
-          <form autoComplete="off" onSubmit={""}>
-            <DialogContent>
-              <DialogContentText>
-                <TextField
-                  name="room_description"
-                  variant="filled"
-                  label="Room Description"
-                  style={{
-                  width: "85%",
-                  margin: "20px",
-                  }}
-                />
-                <TextField
-                  name="room_number"
-                  variant="filled"
-                  label="Room Number"
-                  style={{
-                  width: "85%",
-                  margin: "20px",
-                  }}
-                />
-                  <TextField
-                  name="room_fee"
-                  variant="filled"
-                  label="Room Fee (UGX)"
-                  style={{
-                  width: "85%",
-                  margin: "20px",
-                  }}
-                />
-                <TextField
-                  name="room_type"
-                  variant="filled"
-                  label="Room Type"
-                  style={{
-                  width: "85%",
-                  margin: "20px",
-                  }}
-                />
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button type="submit" color="primary">
-                Save
-              </Button>
-            </DialogActions>
-          </form>
-        </Dialog>
     </>
   );
 };

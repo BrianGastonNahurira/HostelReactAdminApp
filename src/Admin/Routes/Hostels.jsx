@@ -118,7 +118,7 @@ export default () => {
                     <tbody>
                       {state.confirmedhostel.length === 0 ? (
                         <tr>
-                          <td>No bookings to display...</td>
+                          <td>No hostels to display.....</td>
                         </tr>
                       ) : (
                         state.confirmedhostel.map((v, i) => {
@@ -127,7 +127,7 @@ export default () => {
                               <td>{v.hostel_name}</td>
                               <td>{v.telphone_number}</td>
                               <td>
-                                <Link to={`/onehostel/${v.id}`}>
+                                <Link to={`/edithostel/${v.id}`}>
                                   <Button>Edit</Button>
                                 </Link>
                               </td>

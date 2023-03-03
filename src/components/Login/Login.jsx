@@ -41,14 +41,14 @@ const Login = () => {
         const data = Base64.encode(
           JSON.stringify({ ...res.user, role: res.role })
         );
-        localStorage.setItem("token", data);
+        localStorage.setItem("valuee", data);
         setSubmit(false);
         window.location.reload();
       } else {
         const data = Base64.encode(
           JSON.stringify({ ...res.user, role: res.role })
         );
-        sessionStorage.setItem("token", data);
+        sessionStorage.setItem("valuee", data);
         setSubmit(false);
         window.location.reload();
       }
@@ -70,11 +70,13 @@ const Login = () => {
               className="header-txt"
               style={
                 {
-                  // margin: "15px 0px",
+                  margin: "15px 0px",
+                  fontSize: "25px",
+                  fontWeight: "500"
                 }
               }
             >
-              Beacon Hostels
+              Beacon Hostels Admin
             </div>
             <div className="loginCtr">
               <TextField

@@ -99,11 +99,11 @@ const Header=()=>{
             color="primary"
             autoFocus
             onClick={() => {
-              const token_stored = localStorage.getItem("token");
+              const token_stored = localStorage.getItem("valuee");
               if (token_stored) {
-                localStorage.removeItem("token");
+                localStorage.removeItem("valuee");
               } else {
-                sessionStorage.removeItem("token");
+                sessionStorage.removeItem("valuee");
               }
               window.location.replace("/");
             }}

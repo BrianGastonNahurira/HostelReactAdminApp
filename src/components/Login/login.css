@@ -99,7 +99,12 @@
 @media screen and (max-width: 768px) {
   .m-ctr {
     flex-direction: column-reverse;
+    width: 100%;
+    margin: 0px auto;
+    padding-top: 3.5rem;
+  
   }
+ 
   .ctr{
     width: 80%;
   }
@@ -107,12 +112,16 @@
     display: none;
   }
   .text-ctr {
-    margin: 20px 10%;
+    /* margin: 20px 10%; */
+    display: none;
   }
   .text-ctr > div:first-child{
     width: 40%;
     align-items: center;
     padding: 15px;
     justify-content: center;
+  }
+  form img{
+    display: none;
   }
 }

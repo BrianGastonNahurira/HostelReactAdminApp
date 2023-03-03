@@ -1,70 +1,69 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {
-    Alert as MuiAlert,
-    Slide,
-    MenuItem,
-    Select,
-    FormControl,
-    InputLabel,
-    Snackbar,
-    Button,
-    TextField,
-  } from "@mui/material";
+  Alert as MuiAlert,
+  Slide,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  Snackbar,
+  Button,
+  TextField,
+} from "@mui/material";
 import FileUpload from "../../api/files";
 import FormsApi from "../../api/api";
 import "../Design/hostel.css";
 import Header from "../Components/Header/Header";
 import SideBar from "../Components/SideBar/SideBar";
 const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+const ConfirmHostel = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const [state, setState] = useState({
+    hostel: {},
+    landlord: {},
+    files: [],
+    filesChanged: false,
+    mui: {
+      SnackBarOpen: false,
+      snackBarMessage: "",
+      snackBarStatus: "info",
+      snackBarPosition: { vertical: "top", horizontal: "right" },
+    },
   });
-const ConfirmHostel = ()=>{
-    const navigate = useNavigate();
-    const params = useParams();
 
-
-    const [state, setState] = useState({
+  useEffect(() => {
+    (async () => {
+      let res = await new FormsApi().get(`/hostel/${params.id}`);
+      if (res !== "Error") {
+        if (res.status !== false) {
+          setState({
+            ...state,
+            hostel: res.result.hostel || {},
+            landlord: res.result.landlord || {},
+          });
+        }
+      }
+    })();
+    return () => {
+      setState({
         hostel: {},
         landlord: {},
         files: [],
         filesChanged: false,
         mui: {
-            SnackBarOpen: false,
-            snackBarMessage: "",
-            snackBarStatus: "info",
-            snackBarPosition: { vertical: "top", horizontal: "right" },
+          snackBarOpen: false,
+          snackBarMessage: "",
+          snackBarStatus: "info",
+          snackBarPosition: { vertical: "top", horizontal: "right" },
         },
-
-    })
-    useEffect(()=>{
-        (async () => {
-            let res = await new FormsApi().get(`/hostel/${params.id}`);
-            if (res !== "Error") {
-              if (res.status !== false) {
-                setState({
-                  ...state,
-                  hostel: res.result.hostel || {},
-                  landlord: res.result.landlord || {},
-                });
-              }
-            }
-          })();
-          return () => {
-            setState({
-              hostel: {},
-              landlord: {},
-              files: [],
-              filesChanged: false,
-              mui: {
-                snackBarOpen: false,
-                snackBarMessage: "",
-                snackBarStatus: "info",
-                snackBarPosition: { vertical: "top", horizontal: "right" },
-              },
-            });
-          };
-    }, []);
+      });
+    };
+  }, []);
 
   const submitHostel = async (e) => {
     e.preventDefault();
@@ -80,10 +79,10 @@ const ConfirmHostel = ()=>{
     let formDataInstance = new FormData(e.target);
     let form_contents = {};
     formDataInstance.forEach((el, i) => {
-    form_contents[i] = el;
+      form_contents[i] = el;
     });
     form_contents["confirmed"] = true;
-    let res = await new FormsApi().put(`/edit/${params.id}`,form_contents);
+    let res = await new FormsApi().put(`/edit/${params.id}`, form_contents);
     if (res !== "Error") {
       if (res.status !== false) {
         setState({
@@ -109,7 +108,6 @@ const ConfirmHostel = ()=>{
           },
         });
       }
-      
     } else {
       setState({
         ...state,
@@ -122,23 +120,20 @@ const ConfirmHostel = ()=>{
         },
       });
     }
-}
+  };
 
-
-
-
-    const handleClose = (event, reason) => {
-      if (reason === "clickaway") {
-        return;
-      }
-      setState({
-        ...state,
-        mui: { ...state.mui, snackBarMessage: "", snackBarOpen: false },
-      });
-    };
-    return(
-        <>
-        <Snackbar
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setState({
+      ...state,
+      mui: { ...state.mui, snackBarMessage: "", snackBarOpen: false },
+    });
+  };
+  return (
+    <>
+      <Snackbar
         open={state.mui.snackBarOpen}
         anchorOrigin={state.mui.snackBarPosition}
         autoHideDuration={5000}
@@ -160,8 +155,8 @@ const ConfirmHostel = ()=>{
       <div className="main_ctr">
         <Header />
         <main>
-        <div className="main-ctr card">
-        <div className="pdts-header-btns">
+          <div className="main-ctr card">
+            <div className="pdts-header-btns">
               <div>
                 <h2>Update Hostel</h2>
               </div>
@@ -173,28 +168,27 @@ const ConfirmHostel = ()=>{
                 </Link>
               </div>
             </div>
-        <div className="pdts-form-ctr">
-        <form onSubmit={submitHostel} className="new_product_form">
-        <div className="inputs_ctr">
+            <div className="pdts-form-ctr">
+              <form onSubmit={submitHostel} className="new_product_form">
+                <div className="inputs_ctr">
                   <div style={{ marginBlock: 10, fontWeight: "bold" }}>
                     Hostel Info
                   </div>
-              
-                 <div className="inputs_ctr_border">
-                
+
+                  <div className="inputs_ctr_border">
                     <div className="inputs_ctr_flex">
-                    <input
-                      type="hidden"
-                      name="hostel_id"
-                      value={state.hostel.id || " "}
-                      onChange={() => {}}
-                    />
+                      <input
+                        type="hidden"
+                        name="hostel_id"
+                        value={state.hostel.id || " "}
+                        onChange={() => {}}
+                      />
                       <TextField
                         required
                         variant="outlined"
                         color="primary"
                         label="Hostel Name"
-                        name="hostel_name"    
+                        name="hostel_name"
                         style={{ width: "45%" }}
                         value={state.hostel.hostel_name || " "}
                         onChange={(e) => {
@@ -233,7 +227,7 @@ const ConfirmHostel = ()=>{
                         variant="outlined"
                         color="primary"
                         label="Hostel Description"
-                        name="hostel_description"    
+                        name="hostel_description"
                         style={{ width: "100%" }}
                         value={state.hostel.hostel_description || " "}
                         onChange={(e) => {
@@ -292,7 +286,7 @@ const ConfirmHostel = ()=>{
                         variant="outlined"
                         color="primary"
                         label="Telephone Number"
-                        name="telphone_number"    
+                        name="telphone_number"
                         style={{ width: "100%" }}
                         value={state.hostel.telphone_number || " "}
                         onChange={(e) => {
@@ -311,7 +305,7 @@ const ConfirmHostel = ()=>{
                         required
                         variant="outlined"
                         label="Single Rooms Available"
-                        name="single_rooms_available"    
+                        name="single_rooms_available"
                         color="primary"
                         style={{ width: "45%" }}
                         value={state.hostel.single_rooms_available || " "}
@@ -330,7 +324,7 @@ const ConfirmHostel = ()=>{
                         variant="outlined"
                         color="primary"
                         label="Double Rooms Available"
-                        name="double_rooms_available"    
+                        name="double_rooms_available"
                         type="number"
                         style={{ width: "45%" }}
                         value={state.hostel.double_rooms_available || " "}
@@ -365,7 +359,7 @@ const ConfirmHostel = ()=>{
                           });
                         }}
                       />
-                         <TextField
+                      <TextField
                         required
                         variant="outlined"
                         color="primary"
@@ -386,11 +380,10 @@ const ConfirmHostel = ()=>{
                       />
                     </div>
                   </div>
-                
                 </div>
                 <div className="inputs_ctr">
                   {state.filesChanged ? (
-                    <FileUpload/>
+                    <FileUpload />
                   ) : (
                     <>
                       <div style={{ marginBlock: 10, fontWeight: "bold" }}>
@@ -411,8 +404,8 @@ const ConfirmHostel = ()=>{
 
                         <div className="images__preview_ctr">
                           {state.hostel.hostel_images
-                            ? JSON.parse(state.hostel.hostel_images)
-                                .length === 0
+                            ? JSON.parse(state.hostel.hostel_images).length ===
+                              0
                               ? "No Files Chosen"
                               : JSON.parse(state.hostel.hostel_images).map(
                                   (v, i) => {
@@ -444,17 +437,13 @@ const ConfirmHostel = ()=>{
                     </>
                   )}
                 </div>
-                
-        </form>
-
-        </div>
-        </div>
-
+              </form>
+            </div>
+          </div>
         </main>
-        </div>
-        </>
-
-    );
-}
+      </div>
+    </>
+  );
+};
 
 export default ConfirmHostel;

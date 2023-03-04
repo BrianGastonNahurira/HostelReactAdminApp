@@ -69,7 +69,7 @@ const AddHostel = () => {
         ...state,
         mui: {
           ...state.mui,
-          snackBarMessage: res.data,
+          snackBarMessage: "Failed to add hostel, Some other Error",
           snackBarStatus: "warning",
           snackBarOpen: true,
         },
@@ -81,7 +81,7 @@ const AddHostel = () => {
         hostel_id: res.result.id,
         mui: {
           ...state.mui,
-          snackBarMessage: res.data,
+          snackBarMessage: "Hostel added successfully",
           snackBarStatus: "success",
           snackBarOpen: true,
         },

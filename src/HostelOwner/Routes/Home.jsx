@@ -68,15 +68,15 @@ const Home = () => {
   };
   useEffect(() => {
     (async () => {
-      const res = await new FormsApi().get("/rooms/" + user.id);
+      const res = await new FormsApi().get("/rooms/landlord/" + user.id);
       if (res === "Error") {
         console.log(res);
       } else {
         if (res.status) {
-          let available_rooms = [];
           let booked_rooms = [];
+          let available_rooms = [];
           res.result.forEach((el) => {
-            if (el.booked) {
+            if (el.booked === true) {
               booked_rooms = [...booked_rooms, el];
             } else {
               available_rooms = [...available_rooms, el];
@@ -87,6 +87,9 @@ const Home = () => {
       }
     })();
   }, []);
+
+  console.log(state.available_rooms);
+
 //change room status from true to false
   const changesStatustoFalse = async (id, e) => {
     e.preventDefault();

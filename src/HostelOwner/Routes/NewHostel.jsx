@@ -176,40 +176,36 @@ const AddHostel = () => {
                       onChange={() => {}}
                     />
                     <div className="inputs_ctr_flex">
-                      <div className="__1">
-                        <TextField
-                          id="_1_"
-                          required
-                          variant="outlined"
-                          color="primary"
-                          label="Hostel Name"
-                          name="hostel_name"
-                          error={state.fieldsError}
-                          helperText={
-                            state.fieldsError
-                              ? "This field maybe empty, but its required"
-                              : ""
-                          }
-                        />
-                      </div>
-                      <div className="__2">
-                        <TextField
-                          id="_2_"
-                          required
-                          variant="outlined"
-                          color="primary"
-                          label="Distance from University"
-                          name="hostel_distance"
-                          type="text"
-                          // style={{ width: "100%" }}
-                          error={state.fieldsError}
-                          helperText={
-                            state.fieldsError
-                              ? "This field maybe empty, but its required"
-                              : ""
-                          }
-                        />
-                      </div>
+                      <TextField
+                        required
+                        style={{ width: "45%" }}
+                        variant="outlined"
+                        color="primary"
+                        label="Hostel Name"
+                        name="hostel_name"
+                        error={state.fieldsError}
+                        helperText={
+                          state.fieldsError
+                            ? "This field maybe empty, but its required"
+                            : ""
+                        }
+                      />
+
+                      <TextField
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Distance from University"
+                        name="hostel_distance"
+                        type="text"
+                        style={{ width: "45%" }}
+                        error={state.fieldsError}
+                        helperText={
+                          state.fieldsError
+                            ? "This field maybe empty, but its required"
+                            : ""
+                        }
+                      />
                     </div>
                     <div className="inputs_ctr_fullwidth">
                       <TextField
@@ -222,33 +218,30 @@ const AddHostel = () => {
                       />
                     </div>
                     <div className="inputs_ctr_flex">
-                      <div className="__1">
-                        <TextField
-                          id="_1_"
-                          required
-                          variant="outlined"
-                          color="primary"
-                          label="Amount For Single Room(UGX)"
-                          name="single_room_amount"
-                          type="number"
-                          error={state.fieldsError}
-                          helperText={
-                            state.fieldsError
-                              ? "This field maybe empty, but its required"
-                              : ""
-                          }
-                        />
-                      </div>
-                      <div className="__2">
-                        <TextField
-                          id="_2_"
-                          required
-                          variant="outlined"
-                          color="primary"
-                          label="Amount For Double Room"
-                          name="double_room_amount"
-                        />
-                      </div>
+                      <TextField
+                        required
+                        style={{ width: "45%" }}
+                        variant="outlined"
+                        color="primary"
+                        label="Amount For Single Room(UGX)"
+                        name="single_room_amount"
+                        type="number"
+                        error={state.fieldsError}
+                        helperText={
+                          state.fieldsError
+                            ? "This field maybe empty, but its required"
+                            : ""
+                        }
+                      />
+
+                      <TextField
+                        required
+                        style={{ width: "45%" }}
+                        variant="outlined"
+                        color="primary"
+                        label="Amount For Double Room"
+                        name="double_room_amount"
+                      />
                     </div>
                     <div className="inputs_ctr_fullwidth">
                       <TextField
@@ -261,63 +254,57 @@ const AddHostel = () => {
                       />
                     </div>
                     <div className="inputs_ctr_flex">
-                      <div className="__1">
-                        <TextField
-                          id="_1_"
-                          required
-                          variant="outlined"
-                          label="Single Rooms Available"
-                          name="single_rooms_available"
-                          color="primary"
-                          error={state.fieldsError}
-                          helperText={
-                            state.fieldsError
-                              ? "This field maybe empty, but its required"
-                              : ""
-                          }
-                        />
-                      </div>
-                      <div className="__2">
-                        <TextField
-                          id="_2_"
-                          required
-                          variant="outlined"
-                          color="primary"
-                          label="Double Rooms Available"
-                          name="double_rooms_available"
-                          type="number"
-                          error={state.fieldsError}
-                          helperText={
-                            state.fieldsError
-                              ? "This field maybe empty, but its required"
-                              : ""
-                          }
-                        />
-                      </div>
+                      <TextField
+                        required
+                        style={{ width: "45%" }}
+                        variant="outlined"
+                        label="Single Rooms Available"
+                        name="single_rooms_available"
+                        color="primary"
+                        error={state.fieldsError}
+                        helperText={
+                          state.fieldsError
+                            ? "This field maybe empty, but its required"
+                            : ""
+                        }
+                      />
+
+                      <TextField
+                        required
+                        style={{ width: "45%" }}
+                        variant="outlined"
+                        color="primary"
+                        label="Double Rooms Available"
+                        name="double_rooms_available"
+                        type="number"
+                        error={state.fieldsError}
+                        helperText={
+                          state.fieldsError
+                            ? "This field maybe empty, but its required"
+                            : ""
+                        }
+                      />
                     </div>
                     <div className="inputs_ctr_flex">
-                      <div className="__1">
-                        <TextField
-                          id="_1_"
-                          required
-                          variant="outlined"
-                          label="Booking Fee"
-                          name="booking_fee"
-                          color="primary"
-                          multiline
-                        />
-                      </div>
-                      <div className="__2">
-                        <TextField
-                          id="_2_"
-                          required
-                          variant="outlined"
-                          color="primary"
-                          label="Account Number"
-                          name="hostel_account_no"
-                          multiline
-                        />
-                      </div>
+                      <TextField
+                        required
+                        style={{ width: "45%" }}
+                        variant="outlined"
+                        label="Booking Fee"
+                        name="booking_fee"
+                        color="primary"
+                        multiline
+                      />
+
+                      <TextField
+                        style={{ width: "45%" }}
+                        required
+                        variant="outlined"
+                        color="primary"
+                        label="Account Number"
+                        name="hostel_account_no"
+                        multiline
+                      />
                     </div>
                   </div>
                   <div

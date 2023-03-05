@@ -1,63 +1,225 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Alert as MuiAlert,
+  Slide,
   Button,
-  FormControl,
-  IconButton,
-  Input,
-  InputAdornment,
+  Snackbar,
   TextField,
 } from "@mui/material";
 import Header from "../../../HostelOwner/Components/Topbar/Header";
 import Sidebar from "../../../HostelOwner/Components/sidebar/Sidebar";
 import "../designs/profile.css";
 import user from "../../../app.config";
+import FormsApi from "../../../api/api";
+  //alert for material ui
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
 export const LandLordProfile = () => {
   console.log(user);
+  const [state, setState] = useState({
+    landlord: {},
+    mui: { snackBarPosition: { vertical: "top", horizontal: "right" } },
+
+    });
+    useEffect(() => {
+        (async () => {
+          let res = await new FormsApi().get("/owner/one/" + user.id);
+          if (res !== "Error") {
+            if (res.status !== false) {
+              setState({
+                ...state,
+                landlord: res.result || {},
+              });
+            }
+          }
+        })();
+    
+        return () => {
+          setState({
+            landlord: {},
+            mui: {
+              snackBarOpen: false,
+              snackBarMessage: "",
+              snackBarStatus: "info",
+              snackBarPosition: { vertical: "top", horizontal: "right" },
+            },
+          });
+        };
+      }, []);
+
+      const editLandlord = async (e) => {
+        e.preventDefault();
+        setState({
+          ...state,
+          mui: {
+            ...state.mui,
+            snackBarMessage: "Please Wait....",
+            snackBarStatus: "info",
+            snackBarOpen: true,
+          },
+        });
+        let formDataInstance = new FormData(e.target);
+        let form_contents = {};
+        formDataInstance.forEach((el, i) => {
+          form_contents[i] = el;
+        });
+        let res = await new FormsApi().put(`/resetowmer/${user.id}`,
+          form_contents
+        );
+        if (res !== "Error") {
+          if (res.status !== false) {
+            setState({
+              ...state,
+              mui: {
+                ...state.mui,
+                snackBarMessage: "Landlord Updated Successfully....",
+                snackBarStatus: "success",
+                snackBarOpen: true,
+              },
+            });
+         window.location.reload();
+          } else {
+            setState({
+              ...state,
+              mui: {
+                ...state.mui,
+                snackBarMessage: "Editting Landlord Failed, Server Error....",
+                snackBarStatus: "warning",
+                snackBarOpen: true,
+              },
+            });
+          }
+        } else {
+          setState({
+            ...state,
+            mui: {
+              ...state.mui,
+              snackBarMessage:
+                "Editting landlord Failed, Check your internet....",
+              snackBarStatus: "warning",
+              snackBarOpen: true,
+            },
+          });
+        }
+      };
+
+         //close snackBar
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setState({
+      ...state,
+      mui: { ...state.mui, snackBarMessage: "", snackBarOpen: false },
+    });
+  };
 
   return (
     <>
-      {/* console.log(user) */}
+      <Snackbar
+        open={state.mui.snackBarOpen}
+        anchorOrigin={state.mui.snackBarPosition}
+        autoHideDuration={4500}
+        onClose={handleClose}
+        message={state.mui.snackBarMessage}
+        TransitionComponent={(props) => <Slide {...props} direction="down" />}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={state.mui.snackBarStatus}
+          sx={{ width: "100%" }}
+        >
+          {state.mui.snackBarMessage}
+        </Alert>
+      </Snackbar>
+      <input type="checkbox" id="nav-toggle" defaultChecked />
+     
+      <Sidebar active="home" />
+      <div className="main_ctr">
       <Header />
-      <Sidebar />
+      <main>
       <div className="__profile__">
         <div className="profile">
           <div className="showprofile">
             <h2>My Profile</h2>
             <p>
               <span>Username: &nbsp; &nbsp; &nbsp;</span>
-              {user.name}
+              {state.landlord.name}
             </p>
             <p>
               <span>Email: &nbsp; &nbsp; &nbsp;</span>
-              {user.email}
+              {state.landlord.email}
             </p>
             <p>
               <span>Phone Number: &nbsp; &nbsp; &nbsp;</span>0
-              {user.phone_number}
+              {state.landlord.phone_number}
             </p>
           </div>
           <div className="editprofile">
             <h2>Edit Profile</h2>
-            <form>
+            <form onSubmit={editLandlord}>
               <div>
                 <TextField
                   id="outlined-basic"
                   label="User name"
-                  variant="standard"
+                  name="name"
+                  color="primary"
+                  variant="filled"
+                  style={{ width: "50%" }}
+                  value={state.landlord.name}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        name: e.target.value,
+                      },
+                    });
+                  }}
+
                 />
               </div>
               <div>
                 <TextField
                   id="outlined-basic"
                   label="email"
-                  variant="standard"
+                  name="email"
+                  color="primary"
+                  variant="filled"
+                  style={{ width: "50%" }}
+                  value={state.landlord.email}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        email: e.target.value,
+                      },
+                    });
+                  }}
+
                 />
               </div>
               <div>
                 <TextField
                   id="outlined-basic"
                   label="phone_number"
-                  variant="standard"
+                  color="primary"
+                  variant="filled"
+                  name="phone_number"
+                  style={{ width: "50%" }}
+                  value={state.landlord.phone_number}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        phone_number: e.target.value,
+                      },
+                    });
+                  }}
                 />
               </div>
               <div>
@@ -65,15 +227,29 @@ export const LandLordProfile = () => {
                   id="outlined-basic"
                   label="password"
                   type="password"
-                  variant="standard"
+                  name="password"
+                  variant="filled"
+                  style={{ width: "50%" }}
+                  value={state.landlord.password}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        password: e.target.value,
+                      },
+                    });
+                  }}
                 />
               </div>
               <div>
-                <Button variant="contained">Confirm changes</Button>
+                <Button variant="contained" type="submit">Confirm changes</Button>
               </div>
             </form>
           </div>
         </div>
+      </div>
+      </main>
       </div>
     </>
   );

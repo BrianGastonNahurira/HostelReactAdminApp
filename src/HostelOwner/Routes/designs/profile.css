@@ -1,0 +1,45 @@
+.__profile__ {
+  margin-left: 20%;
+  margin-top: 10%;
+}
+.profile {
+  display: flex;
+  flex: 2;
+  justify-content: space-around;
+}
+.showprofile {
+  flex: 1;
+}
+.editprofile {
+  flex: 1;
+}
+.profile span {
+  color: blue;
+  /* font-size: larger; */
+}
+.showprofile p {
+  padding: 5px;
+  font-size: larger;
+}
+.editprofile div {
+  padding: 5px;
+}
+@media only screen and (max-width: 380px) {
+  .profile {
+    display: grid;
+  }
+  .__profile__ {
+    margin-top: 130px;
+    margin-left: 5%;
+  }
+  .showprofile p {
+    padding: 2px;
+    font-size: medium;
+  }
+  .editprofile {
+    padding-top: 10px;
+  }
+  .editprofile div {
+    padding: 1px;
+  }
+}

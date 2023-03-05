@@ -43,3 +43,22 @@
     padding: 1px;
   }
 }
+@media only screen and (max-width: 680px) {
+  .profile {
+    display: grid;
+  }
+  .__profile__ {
+    margin-top: 130px;
+    margin-left: 5%;
+  }
+  .showprofile p {
+    padding: 2px;
+    font-size: medium;
+  }
+  .editprofile {
+    padding-top: 10px;
+  }
+  .editprofile div {
+    padding: 1px;
+  }
+}

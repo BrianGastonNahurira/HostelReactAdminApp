@@ -159,7 +159,7 @@ export const LandLordProfile = () => {
           </div>
           <div className="editprofile">
             <h2>Edit Profile</h2>
-            <form onSubmit={editLandlord}>
+            <form onSubmit={editLandlord} autoComplete="off">
               <div>
                 <TextField
                   id="outlined-basic"
@@ -167,7 +167,7 @@ export const LandLordProfile = () => {
                   name="name"
                   color="primary"
                   variant="filled"
-                  style={{ width: "50%" }}
+                  style={{ width: "100%" }}
                   value={state.landlord.name}
                   onChange={(e) => {
                     setState({
@@ -188,7 +188,7 @@ export const LandLordProfile = () => {
                   name="email"
                   color="primary"
                   variant="filled"
-                  style={{ width: "50%" }}
+                  style={{ width: "100%" }}
                   value={state.landlord.email}
                   onChange={(e) => {
                     setState({
@@ -209,7 +209,7 @@ export const LandLordProfile = () => {
                   color="primary"
                   variant="filled"
                   name="phone_number"
-                  style={{ width: "50%" }}
+                  style={{ width: "100%" }}
                   value={state.landlord.phone_number}
                   onChange={(e) => {
                     setState({
@@ -229,7 +229,7 @@ export const LandLordProfile = () => {
                   type="password"
                   name="password"
                   variant="filled"
-                  style={{ width: "50%" }}
+                  style={{ width: "100%" }}
                   value={state.landlord.password}
                   onChange={(e) => {
                     setState({

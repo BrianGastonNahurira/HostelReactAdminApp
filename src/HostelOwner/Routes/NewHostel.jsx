@@ -129,7 +129,7 @@ const AddHostel = () => {
           <h2 style={{ textAlign: "center", color: "gray" }}>
             Register A New Hostel
           </h2>
-          <div className="main-ctr card">
+          <div className="main-ctr __card">
             <div className="pdts-header-btns">
               <div>
                 <h2>New Hostel</h2>
@@ -164,7 +164,7 @@ const AddHostel = () => {
                       : {}
                   }
                 >
-                  <div style={{ marginBlock: 10, fontWeight: "bold" }}>
+                  <div style={{ marginBlock: 5, fontWeight: "bold" }} className="___info">
                     Hostel Information
                   </div>
                   <div className="inputs_ctr_border">
@@ -182,7 +182,7 @@ const AddHostel = () => {
                         color="primary"
                         label="Hostel Name"
                         name="hostel_name"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -197,7 +197,7 @@ const AddHostel = () => {
                         label="Distance from University"
                         name="hostel_distance"
                         type="text"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -224,7 +224,7 @@ const AddHostel = () => {
                         label="Amount For Single Room(UGX)"
                         name="single_room_amount"
                         type="number"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -238,7 +238,7 @@ const AddHostel = () => {
                         color="primary"
                         label="Amount For Double Room"
                         name="double_room_amount"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                       />
                     </div>
                     <div className="inputs_ctr_fullwidth">
@@ -258,7 +258,7 @@ const AddHostel = () => {
                         label="Single Rooms Available"
                         name="single_rooms_available"
                         color="primary"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -273,7 +273,7 @@ const AddHostel = () => {
                         label="Double Rooms Available"
                         name="double_rooms_available"
                         type="number"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -290,7 +290,7 @@ const AddHostel = () => {
                         name="booking_fee"
                         color="primary"
                         multiline
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                       />
                       <TextField
                         required
@@ -299,7 +299,7 @@ const AddHostel = () => {
                         label="Account Number"
                         name="hostel_account_no"
                         multiline
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                       />
                     </div>
                   </div>

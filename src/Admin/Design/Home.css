@@ -1,10 +1,8 @@
-
 .home-body {
   margin-left: 28vh;
   margin-right: 3vh;
   margin-top: -90vh;
 }
-
 
 @media screen and (max-width: 500px) {
   .home-body {

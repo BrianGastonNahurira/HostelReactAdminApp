@@ -1,7 +1,6 @@
-.registerform{
+.registerform {
   display: flex;
   flex: 2;
-
 }
 
 .description {
@@ -10,7 +9,6 @@
 .form {
   flex: 1;
   margin: 0px 40px 20px 40px;
-
 }
 .registerhostelowner {
   border-radius: 4px;
@@ -36,7 +34,6 @@
   }
   .registerhostelowner {
     background-color: rgb(250, 247, 247);
-    
   }
   .submit-btn {
     margin-left: 80px !important;

@@ -133,7 +133,7 @@ export const LandLordProfile = () => {
       <input type="checkbox" id="nav-toggle" defaultChecked />
 
       <Sidebar active="home" />
-      <div className="main_ctr">
+      {/* <div className="main_ctr"> */}
       <Header />
       <main>
       <div className="__profile__">

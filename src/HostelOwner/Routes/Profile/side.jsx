@@ -11,101 +11,97 @@ import Sidebar from "../../../HostelOwner/Components/sidebar/Sidebar";
 import "../designs/profile.css";
 import user from "../../../app.config";
 import FormsApi from "../../../api/api";
-  //alert for material ui
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+//alert for material ui
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export const LandLordProfile = () => {
   console.log(user);
   const [state, setState] = useState({
     landlord: {},
     mui: { snackBarPosition: { vertical: "top", horizontal: "right" } },
-
-    });
-    useEffect(() => {
-        (async () => {
-          let res = await new FormsApi().get("/owner/one/" + user.id);
-          if (res !== "Error") {
-            if (res.status !== false) {
-              setState({
-                ...state,
-                landlord: res.result || {},
-              });
-            }
-          }
-        })();
-    
-        return () => {
+  });
+  useEffect(() => {
+    (async () => {
+      let res = await new FormsApi().get("/owner/one/" + user.id);
+      if (res !== "Error") {
+        if (res.status !== false) {
           setState({
-            landlord: {},
-            mui: {
-              snackBarOpen: false,
-              snackBarMessage: "",
-              snackBarStatus: "info",
-              snackBarPosition: { vertical: "top", horizontal: "right" },
-            },
+            ...state,
+            landlord: res.result || {},
           });
-        };
-      }, []);
+        }
+      }
+    })();
 
-      const editLandlord = async (e) => {
-        e.preventDefault();
+    return () => {
+      setState({
+        landlord: {},
+        mui: {
+          snackBarOpen: false,
+          snackBarMessage: "",
+          snackBarStatus: "info",
+          snackBarPosition: { vertical: "top", horizontal: "right" },
+        },
+      });
+    };
+  }, []);
+
+  const editLandlord = async (e) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      mui: {
+        ...state.mui,
+        snackBarMessage: "Please Wait....",
+        snackBarStatus: "info",
+        snackBarOpen: true,
+      },
+    });
+    let formDataInstance = new FormData(e.target);
+    let form_contents = {};
+    formDataInstance.forEach((el, i) => {
+      form_contents[i] = el;
+    });
+    let res = await new FormsApi().put(`/resetowmer/${user.id}`, form_contents);
+    if (res !== "Error") {
+      if (res.status !== false) {
         setState({
           ...state,
           mui: {
             ...state.mui,
-            snackBarMessage: "Please Wait....",
-            snackBarStatus: "info",
+            snackBarMessage: "Landlord Updated Successfully....",
+            snackBarStatus: "success",
             snackBarOpen: true,
           },
         });
-        let formDataInstance = new FormData(e.target);
-        let form_contents = {};
-        formDataInstance.forEach((el, i) => {
-          form_contents[i] = el;
+        window.location.reload();
+      } else {
+        setState({
+          ...state,
+          mui: {
+            ...state.mui,
+            snackBarMessage: "Editting Landlord Failed, Server Error....",
+            snackBarStatus: "warning",
+            snackBarOpen: true,
+          },
         });
-        let res = await new FormsApi().put(`/resetowmer/${user.id}`,
-          form_contents
-        );
-        if (res !== "Error") {
-          if (res.status !== false) {
-            setState({
-              ...state,
-              mui: {
-                ...state.mui,
-                snackBarMessage: "Landlord Updated Successfully....",
-                snackBarStatus: "success",
-                snackBarOpen: true,
-              },
-            });
-         window.location.reload();
-          } else {
-            setState({
-              ...state,
-              mui: {
-                ...state.mui,
-                snackBarMessage: "Editting Landlord Failed, Server Error....",
-                snackBarStatus: "warning",
-                snackBarOpen: true,
-              },
-            });
-          }
-        } else {
-          setState({
-            ...state,
-            mui: {
-              ...state.mui,
-              snackBarMessage:
-                "Editting landlord Failed, Check your internet....",
-              snackBarStatus: "warning",
-              snackBarOpen: true,
-            },
-          });
-        }
-      };
+      }
+    } else {
+      setState({
+        ...state,
+        mui: {
+          ...state.mui,
+          snackBarMessage: "Editting landlord Failed, Check your internet....",
+          snackBarStatus: "warning",
+          snackBarOpen: true,
+        },
+      });
+    }
+  };
 
-         //close snackBar
+  //close snackBar
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -135,7 +131,7 @@ export const LandLordProfile = () => {
         </Alert>
       </Snackbar>
       <input type="checkbox" id="nav-toggle" defaultChecked />
-     
+
       <Sidebar active="home" />
       <div className="main_ctr">
       <Header />
@@ -247,9 +243,7 @@ export const LandLordProfile = () => {
               </div>
             </form>
           </div>
-        </div>
-      </div>
-      </main>
+        </main>
       </div>
     </>
   );

@@ -1,12 +1,11 @@
-.top_btns{
-    padding: 5px 15px;
-    display: flex;
-    justify-content: space-between;
+.top_btns {
+  padding: 5px 15px;
+  display: flex;
+  justify-content: space-between;
 }
-.__backhme{
-    padding-left: 5rem;
+.__backhme {
+  padding-left: 5rem;
 }
-
 
 @media only screen and (max-width: 768px) {
     .rooms_grid{

@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Button,  Alert as MuiAlert,
+import {
+  Button,
+  Alert as MuiAlert,
   Slide,
-   Menu, MenuItem, Snackbar, TextField, Dialog, DialogTitle, DialogContentText, DialogContent, DialogActions } from "@mui/material";
+  Menu,
+  MenuItem,
+  Snackbar,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContentText,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import Sidebar from "../Components/sidebar/Sidebar";
 import Header from "../Components/Topbar/Header";
 import "./designs/home.css";
 import FormsApi from "../../api/api";
 import user from "../../app.config";
-  //alert for material ui
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+//alert for material ui
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Home = () => {
   const [state, setState] = useState({
@@ -90,7 +101,7 @@ const Home = () => {
 
   console.log(state.available_rooms);
 
-//change room status from true to false
+  //change room status from true to false
   const changesStatustoFalse = async (id, e) => {
     e.preventDefault();
     setState({
@@ -114,7 +125,7 @@ const Home = () => {
             snackBarOpen: true,
           },
         });
-          window.location.reload();
+        window.location.reload();
       } else {
         setState({
           ...state,
@@ -126,71 +137,67 @@ const Home = () => {
           },
         });
       }
-      
     } else {
       setState({
         ...state,
         mui: {
           ...state.mui,
-          snackBarMessage:
-            "Change Status Failed, Check your internet....",
+          snackBarMessage: "Change Status Failed, Check your internet....",
           snackBarStatus: "warning",
           snackBarOpen: true,
         },
       });
     }
-}
+  };
 
-//change room status from false to true
-const changesStatustoTrue = async (id, e) => {
-  e.preventDefault();
-  setState({
-    ...state,
-    mui: {
-      ...state.mui,
-      snackBarMessage: "Please Wait....",
-      snackBarStatus: "info",
-      snackBarOpen: true,
-    },
-  });
-  let res = await new FormsApi().put(`/room/true/${id}`);
-  if (res !== "Error") {
-    if (res.status !== false) {
-      setState({
-        ...state,
-        mui: {
-          ...state.mui,
-          snackBarMessage: "Room Status Successfully....",
-          snackBarStatus: "success",
-          snackBarOpen: true,
-        },
-      });
-        window.location.reload();
-    } else {
-      setState({
-        ...state,
-        mui: {
-          ...state.mui,
-          snackBarMessage: "Change Status Failed, Server Error....",
-          snackBarStatus: "warning",
-          snackBarOpen: true,
-        },
-      });
-    }
-    
-  } else {
+  //change room status from false to true
+  const changesStatustoTrue = async (id, e) => {
+    e.preventDefault();
     setState({
       ...state,
       mui: {
         ...state.mui,
-        snackBarMessage:
-          "Change Status Failed, Check your internet....",
-        snackBarStatus: "warning",
+        snackBarMessage: "Please Wait....",
+        snackBarStatus: "info",
         snackBarOpen: true,
       },
     });
-  }
-}
+    let res = await new FormsApi().put(`/room/true/${id}`);
+    if (res !== "Error") {
+      if (res.status !== false) {
+        setState({
+          ...state,
+          mui: {
+            ...state.mui,
+            snackBarMessage: "Room Status Successfully....",
+            snackBarStatus: "success",
+            snackBarOpen: true,
+          },
+        });
+        window.location.reload();
+      } else {
+        setState({
+          ...state,
+          mui: {
+            ...state.mui,
+            snackBarMessage: "Change Status Failed, Server Error....",
+            snackBarStatus: "warning",
+            snackBarOpen: true,
+          },
+        });
+      }
+    } else {
+      setState({
+        ...state,
+        mui: {
+          ...state.mui,
+          snackBarMessage: "Change Status Failed, Check your internet....",
+          snackBarStatus: "warning",
+          snackBarOpen: true,
+        },
+      });
+    }
+  };
 
   //close snackBar
   const handleClose1 = (event, reason) => {
@@ -204,7 +211,7 @@ const changesStatustoTrue = async (id, e) => {
   };
   return (
     <>
-       <Snackbar
+      <Snackbar
         open={state.mui.snackBarOpen}
         anchorOrigin={state.mui.snackBarPosition}
         autoHideDuration={4500}
@@ -336,26 +343,23 @@ const changesStatustoTrue = async (id, e) => {
                         state.available_rooms.map((v, i) => {
                           return (
                             <tr key={i}>
-                              
                               <td>{v.room_number}</td>
                               <td>{v.room_fee}</td>
                               <td>{v.room_type}</td>
                               <td>{v.hostel_name}</td>
                               <td>
-                              <Link to={`/editroom/${v.id}`}> 
-                                <Button
-                                >
-                                  Edit
-                                </Button>
+                                <Link to={`/editroom/${v.id}`}>
+                                  <Button>Edit</Button>
                                 </Link>
                               </td>
                               <td>
-                              <Button
-                               onClick={(ell) =>changesStatustoTrue(v.id, ell)
-                               }
-                              >
-                              Free
-                              </Button>
+                                <Button
+                                  onClick={(ell) =>
+                                    changesStatustoTrue(v.id, ell)
+                                  }
+                                >
+                                  Free
+                                </Button>
                               </td>
                             </tr>
                           );
@@ -399,7 +403,8 @@ const changesStatustoTrue = async (id, e) => {
                                 <Button
                                   variant="contained"
                                   color="primary"
-                                  onClick={(ell) =>changesStatustoFalse(v.id, ell)
+                                  onClick={(ell) =>
+                                    changesStatustoFalse(v.id, ell)
                                   }
                                 >
                                   Remove

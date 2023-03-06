@@ -135,12 +135,12 @@ const AddHostel = () => {
                 <h2>New Hostel</h2>
               </div>
               <div>
-            <Link to="/">
-              <Button variant="contained" color="primary">
-                Back
-              </Button>
-            </Link>
-          </div>
+                <Link to="/">
+                  <Button variant="contained" color="primary">
+                    Back
+                  </Button>
+                </Link>
+              </div>
             </div>
             <div className="progress_bar_new_product">
               <div
@@ -178,11 +178,12 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
+                        style={{ width: "45%" }}
                         variant="outlined"
                         color="primary"
                         label="Hostel Name"
                         name="hostel_name"
-                        style={{ width: "80%", padding:"5px"}}
+                        style={{ width: "45%" }}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -190,6 +191,7 @@ const AddHostel = () => {
                             : ""
                         }
                       />
+
                       <TextField
                         required
                         variant="outlined"
@@ -219,12 +221,13 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
+                        style={{ width: "45%" }}
                         variant="outlined"
                         color="primary"
                         label="Amount For Single Room(UGX)"
                         name="single_room_amount"
                         type="number"
-                        style={{ width: "80%", padding:"5px"}}
+                        style={{ width: "45%" }}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -232,13 +235,15 @@ const AddHostel = () => {
                             : ""
                         }
                       />
+
                       <TextField
                         required
+                        style={{ width: "45%" }}
                         variant="outlined"
                         color="primary"
                         label="Amount For Double Room"
                         name="double_room_amount"
-                        style={{ width: "80%", padding:"5px"}}
+                        style={{ width: "45%" }}
                       />
                     </div>
                     <div className="inputs_ctr_fullwidth">
@@ -254,11 +259,12 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
+                        style={{ width: "45%" }}
                         variant="outlined"
                         label="Single Rooms Available"
                         name="single_rooms_available"
                         color="primary"
-                        style={{ width: "80%", padding:"5px"}}
+                        style={{ width: "45%" }}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -266,14 +272,16 @@ const AddHostel = () => {
                             : ""
                         }
                       />
+
                       <TextField
                         required
+                        style={{ width: "45%" }}
                         variant="outlined"
                         color="primary"
                         label="Double Rooms Available"
                         name="double_rooms_available"
                         type="number"
-                        style={{ width: "80%", padding:"5px"}}
+                        style={{ width: "45%" }}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -285,21 +293,24 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
+                        style={{ width: "45%" }}
                         variant="outlined"
                         label="Booking Fee"
                         name="booking_fee"
                         color="primary"
                         multiline
-                        style={{ width: "80%", padding:"5px"}}
+                        style={{ width: "45%" }}
                       />
+
                       <TextField
+                        style={{ width: "45%" }}
                         required
                         variant="outlined"
                         color="primary"
                         label="Account Number"
                         name="hostel_account_no"
                         multiline
-                        style={{ width: "80%", padding:"5px"}}
+                        style={{ width: "45%" }}
                       />
                     </div>
                   </div>

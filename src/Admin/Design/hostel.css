@@ -104,6 +104,16 @@
     margin: 0px;
     padding: 0px;
   }
+  .inputs_ctr_flex {
+    padding: 0px;
+  }
+  .inputs_ctr_fullwidth {
+    padding: 15px 5px;
+    
+  }
+  .inputs_ctr_halfwidth {
+    padding: 5px 0px;
+  }
   .inputs_ctr_border {
     border: none;
   }
@@ -129,5 +139,8 @@
     border-radius: 5px;
     width: 100%;
     height: 100%;
+  }
+  .new_pdt_btn_refs_ctr {
+    margin: 0px;
   }
 }

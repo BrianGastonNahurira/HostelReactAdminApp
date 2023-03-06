@@ -87,7 +87,7 @@ export default ({ hostel, confirming }) => {
             window.location.reload();
           } else {
             setTimeout(() => {
-              nav("/hostels");
+              nav("/");
             }, 3000);
           }
         } else {

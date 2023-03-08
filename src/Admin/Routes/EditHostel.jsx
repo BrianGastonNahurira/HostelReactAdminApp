@@ -123,7 +123,8 @@ const EditHostel = ()=>{
     }
 }
 
-
+let fileUrls = state.hostel.hostel_images;
+let deleteFiles = false;
 
 
     const handleClose = (event, reason) => {
@@ -194,7 +195,7 @@ const EditHostel = ()=>{
                         color="primary"
                         label="Hostel Name"
                         name="hostel_name"    
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.hostel_name || " "}
                         onChange={(e) => {
                           setState({
@@ -213,7 +214,7 @@ const EditHostel = ()=>{
                         label="Distance from University"
                         name="hostel_distance"
                         type="text"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.hostel_distance || " "}
                         onChange={(e) => {
                           setState({
@@ -254,7 +255,7 @@ const EditHostel = ()=>{
                         label="Amount For Single Room(UGX)"
                         name="single_room_amount"
                         type="number"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.single_room_amount || " "}
                         onChange={(e) => {
                           setState({
@@ -272,7 +273,7 @@ const EditHostel = ()=>{
                         color="primary"
                         label="Amount For Double Room"
                         name="double_room_amount"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.double_room_amount || " "}
                         onChange={(e) => {
                           setState({
@@ -312,7 +313,7 @@ const EditHostel = ()=>{
                         label="Single Rooms Available"
                         name="single_rooms_available"    
                         color="primary"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.single_rooms_available || " "}
                         onChange={(e) => {
                           setState({
@@ -331,7 +332,7 @@ const EditHostel = ()=>{
                         label="Double Rooms Available"
                         name="double_rooms_available"    
                         type="number"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.double_rooms_available || " "}
                         onChange={(e) => {
                           setState({
@@ -352,7 +353,7 @@ const EditHostel = ()=>{
                         name="booking_fee"
                         color="primary"
                         multiline
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.booking_fee || " "}
                         onChange={(e) => {
                           setState({
@@ -371,7 +372,7 @@ const EditHostel = ()=>{
                         label="Account Number"
                         name="hostel_account_no"
                         multiline
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         value={state.hostel.hostel_account_no || " "}
                         onChange={(e) => {
                           setState({
@@ -389,7 +390,7 @@ const EditHostel = ()=>{
                 </div>
                 <div className="inputs_ctr">
                   {state.filesChanged ? (
-                    <FileUpload/>
+                    <FileUpload hostel={params.id}/>
                   ) : (
                     <>
                       <div style={{ marginBlock: 10, fontWeight: "bold" }}>

@@ -33,7 +33,7 @@ export const StateTable = () => {
         }
       }
     })();
-  });
+  }, []);
 
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "437px" }}>

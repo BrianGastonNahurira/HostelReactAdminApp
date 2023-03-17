@@ -133,120 +133,120 @@ export const LandLordProfile = () => {
       <input type="checkbox" id="nav-toggle" defaultChecked />
 
       <Sidebar active="home" />
-      <div className="main_ctr">
-        <Header />
-        <main>
-          <div className="__profile__">
-            <div className="profile">
-              <div className="showprofile">
-                <h2>My Profile</h2>
-                <p>
-                  <span>Username: &nbsp; &nbsp; &nbsp;</span>
-                  {state.landlord.name}
-                </p>
-                <p>
-                  <span>Email: &nbsp; &nbsp; &nbsp;</span>
-                  {state.landlord.email}
-                </p>
-                <p>
-                  <span>Phone Number: &nbsp; &nbsp; &nbsp;</span>0
-                  {state.landlord.phone_number}
-                </p>
-              </div>
-              <div className="editprofile">
-                <h2>Edit Profile</h2>
-                <form onSubmit={editLandlord}>
-                  <div>
-                    <TextField
-                      id="outlined-basic"
-                      label="User name"
-                      name="name"
-                      color="primary"
-                      variant="filled"
-                      style={{ width: "70%" }}
-                      value={state.landlord.name}
-                      onChange={(e) => {
-                        setState({
-                          ...state,
-                          landlord: {
-                            ...state.landlord,
-                            name: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      id="outlined-basic"
-                      label="email"
-                      name="email"
-                      color="primary"
-                      variant="filled"
-                      style={{ width: "70%" }}
-                      value={state.landlord.email}
-                      onChange={(e) => {
-                        setState({
-                          ...state,
-                          landlord: {
-                            ...state.landlord,
-                            email: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      id="outlined-basic"
-                      label="phone_number"
-                      color="primary"
-                      variant="filled"
-                      name="phone_number"
-                      style={{ width: "70%" }}
-                      value={state.landlord.phone_number}
-                      onChange={(e) => {
-                        setState({
-                          ...state,
-                          landlord: {
-                            ...state.landlord,
-                            phone_number: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      id="outlined-basic"
-                      label="password"
-                      type="password"
-                      name="password"
-                      variant="filled"
-                      style={{ width: "70%" }}
-                      value={state.landlord.password}
-                      onChange={(e) => {
-                        setState({
-                          ...state,
-                          landlord: {
-                            ...state.landlord,
-                            password: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <Button variant="contained" type="submit">
-                      Confirm changes
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </div>
+      {/* <div className="main_ctr"> */}
+      <Header />
+      <main>
+      <div className="__profile__">
+        <div className="profile">
+          <div className="showprofile">
+            <h2>My Profile</h2>
+            <p>
+              <span>Username: &nbsp; &nbsp; &nbsp;</span>
+              {state.landlord.name}
+            </p>
+            <p>
+              <span>Email: &nbsp; &nbsp; &nbsp;</span>
+              {state.landlord.email}
+            </p>
+            <p>
+              <span>Phone Number: &nbsp; &nbsp; &nbsp;</span>0
+              {state.landlord.phone_number}
+            </p>
           </div>
-        </main>
+          <div className="editprofile">
+            <h2>Edit Profile</h2>
+            <form onSubmit={editLandlord} autoComplete="off">
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="User name"
+                  name="name"
+                  color="primary"
+                  variant="filled"
+                  style={{ width: "100%" }}
+                  value={state.landlord.name}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        name: e.target.value,
+                      },
+                    });
+                  }}
+
+                />
+              </div>
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="email"
+                  name="email"
+                  color="primary"
+                  variant="filled"
+                  style={{ width: "100%" }}
+                  value={state.landlord.email}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        email: e.target.value,
+                      },
+                    });
+                  }}
+
+                />
+              </div>
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="phone_number"
+                  color="primary"
+                  variant="filled"
+                  name="phone_number"
+                  style={{ width: "100%" }}
+                  value={state.landlord.phone_number}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        phone_number: e.target.value,
+                      },
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="password"
+                  type="password"
+                  name="password"
+                  variant="filled"
+                  style={{ width: "100%" }}
+                  value={state.landlord.password}
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      landlord: {
+                        ...state.landlord,
+                        password: e.target.value,
+                      },
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <Button variant="contained" type="submit">Confirm changes</Button>
+              </div>
+            </form>
+          </div>
+       
       </div>
+      </div>
+      </main>
     </>
   );
 };

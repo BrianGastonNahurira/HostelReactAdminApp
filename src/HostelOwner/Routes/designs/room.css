@@ -1,4 +1,3 @@
-
 .app-manager-ctr > div {
   flex: 1;
   margin: 10px;
@@ -8,34 +7,40 @@
   justify-content: space-between;
   margin: 10px 0px;
 }
+.manage-comp-ctr {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  width: 90%;
+  margin: 10px auto;
+  align-items: center;
+}
+.room-ctr-fields {
+  column-gap: 1rem;
+  row-gap: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 15px 20px;
+  flex: 1;
+}
+.room-btn {
+  padding-left: 4rem;
+}
+
+@media only screen and (max-width: 768px) {
   .manage-comp-ctr {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: none;
     border-radius: 5px;
-    padding: 10px;
-    width: 90%;
-    margin: 10px auto;
-    align-items: center;
+    padding: 0px;
+    width: 100%;
+    margin: 0px;
   }
   .room-ctr-fields {
     column-gap: 1rem;
     row-gap: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* border: none; */
     border-radius: 5px;
-    padding: 15px 20px;
+    padding: 5px;
     flex: 1;
   }
-  .room-btn{
-    padding-left: 4rem;
-  }
-
-@media only screen and (max-width: 768px) {
-  .manage-comp-ctr {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    margin: 10px auto;
-    align-items: center;
-  }
- 
 }

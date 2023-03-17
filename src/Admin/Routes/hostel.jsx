@@ -383,7 +383,7 @@ const ConfirmHostel = () => {
                 </div>
                 <div className="inputs_ctr">
                   {state.filesChanged ? (
-                    <FileUpload />
+                    <FileUpload hostel={params.id} confirming={true}/>
                   ) : (
                     <>
                       <div style={{ marginBlock: 10, fontWeight: "bold" }}>

@@ -10,7 +10,6 @@ import {
   Snackbar,
   TextField,
 } from "@mui/material";
-import { UploadSingle } from "../../api/files";
 import ".//designs/room.css";
 import Sidebar from "../Components/sidebar/Sidebar";
 import Header from "../Components/Topbar/Header";
@@ -172,7 +171,7 @@ const hostel_n = state.hostels.filter((l)=>{
                 onChange={() => {}}
                     />
               <div className="room-inputs-ctr-divided">
-                <FormControl style={{ width: "48%" }}>
+                <FormControl style={{ width: "100%" ,padding:"5px"}}>
                   <InputLabel id="select-hostel-label">
                     Select Hostel
                   </InputLabel>
@@ -195,7 +194,7 @@ const hostel_n = state.hostels.filter((l)=>{
                     )}
                   </Select>
                 </FormControl>
-                <FormControl style={{ width: "48%" }}>
+                <FormControl style={{ width: "100%" ,padding:"5px"}}>
                   <InputLabel id="select-room-type-label">
                     Select Room Type
                   </InputLabel>
@@ -225,14 +224,14 @@ const hostel_n = state.hostels.filter((l)=>{
                   name="room_number"
                   variant="outlined"
                   color="primary"
-                  style={{ width: "48%" }}
+                  style={{ width: "100%" ,padding:"5px"}}
                 />
                 <TextField
                   label="Room Fee(UGX)"
                   name="room_fee"
                   variant="outlined"
                   color="primary"
-                  style={{ width: "48%" }}
+                  style={{ width: "100%" ,padding:"5px"}}
                 />
               </div>
               <div>

@@ -289,17 +289,14 @@ const Home = () => {
               <div className="card">
                 <div className="card-header">
                   <h3>Available Rooms</h3>
-                  {/* <div className="search__">
-                    <TextField
-                      name="name"
-                      id="search__"
-                      variant="outlined"
-                      label="Search Room"
-                      style={{
-                        width: "20%",
-                      }}
-                    />
-                  </div> */}
+                  {/* <TextField
+                    name="name"
+                    variant="outlined"
+                    label="Search Room"
+                    style={{
+                      width: "20%",
+                    }}
+                  /> */}
                   <Button
                     variant="contained"
                     color="primary"

@@ -87,7 +87,7 @@ export default ({ hostel, confirming }) => {
             window.location.reload();
           } else {
             setTimeout(() => {
-              nav("/hostels");
+              nav("/");
             }, 3000);
           }
         } else {
@@ -167,12 +167,12 @@ export default ({ hostel, confirming }) => {
               Clear Selection
             </Button>
           </div>
-          <span style={{ marginLeft: 10 }}>Select Up to 5 images</span>
+          <span style={{ marginLeft: 10 }}>Select Up to 4 images</span>
           <input
             ref={fileInput}
             type="file"
             multiple
-            max={5}
+            max={4}
             hidden
             onChange={handleChange}
           />

@@ -129,7 +129,7 @@ const AddHostel = () => {
           <h2 style={{ textAlign: "center", color: "gray" }}>
             Register A New Hostel
           </h2>
-          <div className="main-ctr card">
+          <div className="main-ctr __card">
             <div className="pdts-header-btns">
               <div>
                 <h2>New Hostel</h2>
@@ -164,7 +164,7 @@ const AddHostel = () => {
                       : {}
                   }
                 >
-                  <div style={{ marginBlock: 10, fontWeight: "bold" }}>
+                  <div style={{ marginBlock: 5, fontWeight: "bold" }} className="___info">
                     Hostel Information
                   </div>
                   <div className="inputs_ctr_border">
@@ -178,7 +178,7 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         variant="outlined"
                         color="primary"
                         label="Hostel Name"
@@ -198,7 +198,7 @@ const AddHostel = () => {
                         label="Distance from University"
                         name="hostel_distance"
                         type="text"
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -220,7 +220,7 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
-                        style={{ width: "45%" }}
+                        style={{ width: "80%", padding:"5px"}}
                         variant="outlined"
                         color="primary"
                         label="Amount For Single Room(UGX)"
@@ -236,11 +236,12 @@ const AddHostel = () => {
 
                       <TextField
                         required
-                        style={{ width: "45%" }}
                         variant="outlined"
                         color="primary"
                         label="Amount For Double Room"
                         name="double_room_amount"
+                        style={{ width: "80%", padding:"5px"}}
+
                       />
                     </div>
                     <div className="inputs_ctr_fullwidth">
@@ -256,11 +257,11 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
-                        style={{ width: "45%" }}
                         variant="outlined"
                         label="Single Rooms Available"
                         name="single_rooms_available"
                         color="primary"
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -271,12 +272,12 @@ const AddHostel = () => {
 
                       <TextField
                         required
-                        style={{ width: "45%" }}
                         variant="outlined"
                         color="primary"
                         label="Double Rooms Available"
                         name="double_rooms_available"
                         type="number"
+                        style={{ width: "80%", padding:"5px"}}
                         error={state.fieldsError}
                         helperText={
                           state.fieldsError
@@ -288,22 +289,22 @@ const AddHostel = () => {
                     <div className="inputs_ctr_flex">
                       <TextField
                         required
-                        style={{ width: "45%" }}
                         variant="outlined"
                         label="Booking Fee"
                         name="booking_fee"
                         color="primary"
                         multiline
+                        style={{ width: "80%", padding:"5px"}}
                       />
 
                       <TextField
-                        style={{ width: "45%" }}
                         required
                         variant="outlined"
                         color="primary"
                         label="Account Number"
                         name="hostel_account_no"
                         multiline
+                        style={{ width: "80%", padding:"5px"}}
                       />
                     </div>
                   </div>

@@ -166,7 +166,7 @@ export const StateTable = () => {
                     >
                       <TableCell>{v.name}</TableCell>
                       <TableCell>{v.email}</TableCell>
-                      <TableCell>{v.phone}</TableCell>
+                      <TableCell>0{v.phone}</TableCell>
                     </TableRow>
                   </TableBody>
                 );

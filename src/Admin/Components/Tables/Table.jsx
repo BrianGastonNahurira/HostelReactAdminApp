@@ -9,8 +9,10 @@ import {
   TableRow,
   TableCell,
   Paper,
+  Button,
 } from "@mui/material";
 import { async } from "@firebase/util";
+// import FormsApi from "../../../api/api";
 // import "../Statemets/statements.css";
 
 export const StateTable = () => {
@@ -50,6 +52,16 @@ export const StateTable = () => {
       }
     })();
   }, []);
+
+  const deleteBooking = async (id, e) => {
+    const res = await new FormsApi().deleteItem(`/delete/book/${id}`);
+    if (res.status) {
+      alert("Confirm delete");
+      window.location.reload();
+    } else {
+      alert("Un expected error");
+    }
+  };
 
   return (
     <>
@@ -96,18 +108,69 @@ export const StateTable = () => {
               >
                 Level
               </TableCell>
+              <TableCell
+                style={{
+                  color: "blue",
+                  fontWeight: "bolder",
+                  fontSize: "1rem",
+                }}
+                align="center"
+              >
+                Payment status
+              </TableCell>
+
+              <TableCell
+                style={{
+                  color: "blue",
+                  fontWeight: "bolder",
+                  fontSize: "1rem",
+                }}
+                align="center"
+              >
+                Delete
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {state.allbookings.map((row) => (
+            {state.allbookings.map((row, i) => (
               <TableRow
-                key={row.id}
+                key={i.id}
                 sx={{ "&:last-child td, &last-child th": { border: 0 } }}
               >
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.name_of_hostel}</TableCell>
                 <TableCell align="center">{row.room_number}</TableCell>
-                <TableCell align="center">{row.level}</TableCell>
+                <TableCell align="center">{row.booking_date}</TableCell>
+                <TableCell align="center">
+                  <Button
+                    variant="contained"
+                    color={row.book_status ? "primary" : "secondary"}
+                    onClick={async () => {
+                      if (row.book_status) return;
+                      let formsApi = new FormsApi();
+                      let res = await formsApi.put(`/change/true/${row.id}`);
+
+                      if (res === "Error") {
+                        alert("Un expected error");
+                        window.location.reload();
+                      } else if (res.status === false) {
+                        alert("Error again");
+                        window.location.reload();
+                      } else {
+                        alert("payment made");
+                        window.location.reload();
+                      }
+                    }}
+                  >
+                    {row.book_status ? "paid" : "pending"}
+                  </Button>
+                </TableCell>
+
+                <TableCell align="center">
+                  <Button onClick={(e) => deleteBooking(row.id, e)}>
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//different url links
 // const url = "http://127.0.0.1:5051/api/v6";
 // const url = "https://wide-eyed-boa-boot.cyclic.app/api/v6";
 const url = "https://api.beaconhostels.com";
